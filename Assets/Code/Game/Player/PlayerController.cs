@@ -2,10 +2,8 @@ using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
-public class PlayerController : BaseManager
+public class PlayerController : BaseMonoController
 {
-    private IVehicle _vehicle;
-
     private PlayerInput InputSystem; 
     
     private Transform _pivot;
@@ -24,8 +22,7 @@ public class PlayerController : BaseManager
         _forward.SetParent(transform);
         
         InputSystem = new PlayerInput(_pivot,_point, _forward);
-        InputSystem.OnEventClick += MoveToPoint;
-        
+
         Services.Game.Context.Camera.SetFollow(_point);
     }
 
@@ -37,17 +34,5 @@ public class PlayerController : BaseManager
     public override void Execute()
     {
         InputSystem.Execute();
-
-        _pivot.position = _vehicle.Position;
-    }
-
-    private void MoveToPoint(Vector3 worldPosition)
-    {
-        _vehicle.MoveToPoint(worldPosition);   
-    }
-
-    public void AddVehicle(IVehicle vehicle)
-    {
-        _vehicle = vehicle;
     }
 }

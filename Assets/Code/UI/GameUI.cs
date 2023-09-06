@@ -1,4 +1,4 @@
-public class GameUI : BaseUI
+public class GameUI : BaseCanvasUI
 {
         
 }

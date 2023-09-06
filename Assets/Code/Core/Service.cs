@@ -8,5 +8,5 @@ public static class Services
 
     public static ISceneService Scene => SceneService.Instance;
 
-    public static IUIController UI => UIController.Instance;
+    public static IUIController UI => UIService.Instance;
 }

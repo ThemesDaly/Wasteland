@@ -7,4 +7,9 @@ public class GameController : MonoBehaviour
         Services.Game.Load();
         Services.UI.Get<GameUI>().Show();
     }
+    
+    private void OnDestroy()
+    {
+        Services.UI.Get<GameUI>().Hide();
+    }
 }

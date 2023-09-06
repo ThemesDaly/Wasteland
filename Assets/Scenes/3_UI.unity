@@ -67,9 +67,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -104,7 +101,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +114,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -196,12 +193,21 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5927208025660121479, guid: 0e0927a9a433440419da802574136160, type: 3}
       propertyPath: _canvasPrefab
       value: 
       objectReference: {fileID: 2999043952146280123, guid: a195abc6494ed4a8690bf1625bcbbd46, type: 3}
+    - target: {fileID: 5927208025660121479, guid: 0e0927a9a433440419da802574136160, type: 3}
+      propertyPath: _uiScreens.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927208025660121479, guid: 0e0927a9a433440419da802574136160, type: 3}
+      propertyPath: '_uiScreens.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2840978011029019604, guid: 7f49df148c992472eab220505aafed0a, type: 3}
     - target: {fileID: 6680056097534389940, guid: 0e0927a9a433440419da802574136160, type: 3}
       propertyPath: m_Name
       value: UIController
@@ -251,6 +257,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6680056097534389941, guid: 0e0927a9a433440419da802574136160, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 894478880}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0927a9a433440419da802574136160, type: 3}
 --- !u!4 &6680056096440227259 stripped
 Transform:

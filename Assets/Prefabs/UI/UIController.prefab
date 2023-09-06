@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasPrefab: {fileID: 2999043952146280123, guid: a195abc6494ed4a8690bf1625bcbbd46, type: 3}
-  _uiScreens:
-  - {fileID: -9102095925688114209, guid: 0d53f641c25644e8bb5cb5355e50a830, type: 3}
+  _content:
+  - {fileID: 5435666155627387364, guid: f99f4d44c2dd94fda961717b205ec3cb, type: 3}
   - {fileID: 2840978011029019604, guid: 7f49df148c992472eab220505aafed0a, type: 3}
+  - {fileID: 3028001753665358342, guid: 4f217e40013a74eaa818d681bb765bab, type: 3}
