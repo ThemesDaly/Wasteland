@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db05ee3d39ff4e63a4da363c056f9039, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  CameraController: {fileID: 386126728491471917, guid: 6a5289673aa5647b7a3b58c40ed0ea9d, type: 3}
+  PlayerController: {fileID: 2985475338176757392, guid: 230d97dd178d7426499b0e851c6b2fa5, type: 3}
+  VehicleController: {fileID: 3980453656039251228, guid: cb315617dd51d4f3da37db4bd3c4515d, type: 3}
+  VehicleView: {fileID: -8679175715445113944, guid: 215f099ba651f42d893b683d978756f2, type: 3}
+  LayerGround:
+    serializedVersion: 2
+    m_Bits: 64
