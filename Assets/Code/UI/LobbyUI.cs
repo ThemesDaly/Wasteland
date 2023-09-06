@@ -17,11 +17,11 @@ public class LobbyUI : BaseCanvasUI
 
     private void OnGame()
     {
-        Services.Scene.LoadSceneCoroutine(SceneConstants.GAME_LEVEL_INDEX);
+        Services.Scene.LoadSceneCoroutine(CoreConstants.Scene.GAME_LEVEL_INDEX);
     }
 
     private void OnConstructor()
     {
-        Services.Scene.LoadSceneCoroutine(SceneConstants.CONSTRUCTOR_LEVEL_INDEX);
+        Services.Scene.LoadSceneCoroutine(CoreConstants.Scene.CONSTRUCTOR_LEVEL_INDEX);
     }
 }

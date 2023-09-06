@@ -10,6 +10,8 @@ public class GameConfig : Config
 
     [BoxGroup("World")] public LayerMask LayerGround;
 
+    public ModuleAssets Modules;
+
     public override void Init()
     {
         

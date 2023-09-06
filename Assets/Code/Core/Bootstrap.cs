@@ -19,12 +19,12 @@ public class Bootstrap : MonoBehaviour, IBootstrap
 
     private IEnumerator LoadSplashScene()
     {
-        yield return StartCoroutine(Services.Scene.LoadScene(SceneConstants.SPLASH_LEVEL_INDEX));
+        yield return StartCoroutine(Services.Scene.LoadScene(CoreConstants.Scene.SPLASH_LEVEL_INDEX));
         yield return new WaitForSeconds(1f);
         
         SetupTargetFramerate();
         
-        Services.Scene.LoadSceneCoroutine(SceneConstants.LOBBY_LEVEL_INDEX);
+        Services.Scene.LoadSceneCoroutine(CoreConstants.Scene.LOBBY_LEVEL_INDEX);
     }
 
     private void SetupTargetFramerate()
