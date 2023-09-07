@@ -8,7 +8,7 @@ public class ConstructorContext : ICoreSystem
     
     public PlayerConstructor PlayerGame { get; private set; }
 
-    public GridView GridView { get; private set; }
+    public GridPlane GridPlane { get; private set; }
     
     public Grid Grid { get; private set; }
     
@@ -19,8 +19,7 @@ public class ConstructorContext : ICoreSystem
         Grid = new Grid(64, 64);
         Grid.Init();
         
-        GridView = ContextUtils.SpawnManager<GridView>(_controllers, Configs.Get<GameConfig>().GridView);
-        GridView.Init();
+        GridPlane = ContextUtils.SpawnManager<GridPlane>(_controllers, Configs.Get<GameConfig>().gridPlane);
     }
 
     public void DeInit()

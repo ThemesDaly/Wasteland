@@ -10,7 +10,7 @@ public class GameConfig : Config
     [BoxGroup("Controller")] public PlayerCamera PlayerCamera;
     [BoxGroup("Controller")] public PlayerGame PlayerGameController;
     [BoxGroup("Controller")] public PlayerConstructor PlayerConstructorController;
-    [BoxGroup("Controller")] public GridView GridView;
+    [BoxGroup("Controller")] public GridPlane gridPlane;
 
     [BoxGroup("World")] public LayerMask LayerGround;
     [BoxGroup("World")] public LayerMask LayerGrid;
