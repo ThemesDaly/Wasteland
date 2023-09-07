@@ -8,6 +8,8 @@ public class PlayerConstructor : BaseMonoController
     private Transform _point;
     private Transform _forward;
 
+    public ConstructorMonoObject _target;
+
     public override void Init()
     {
         _pivot = new GameObject("Pivot").transform;
@@ -27,6 +29,10 @@ public class PlayerConstructor : BaseMonoController
                                       _forward);
 
         Services.Constructor.Context.PlayerCamera.SetFollow(_point);
+
+        InputSystem.OnUpdate += Enter;
+
+        _target = GameObject.FindFirstObjectByType<ConstructorMonoObject>();
     }
 
     public override void DeInit()
@@ -37,5 +43,11 @@ public class PlayerConstructor : BaseMonoController
     public override void Execute()
     {
         InputSystem.Execute();
+    }
+
+    private void Enter(Vector3 position)
+    {
+        _target.transform.position = position.NormalizeD();
+        Debug.Log($"Enter: {position}");
     }
 }

@@ -18,7 +18,7 @@ MonoBehaviour:
   PlayerConstructorController: {fileID: -6584061510271490880, guid: d358396b856d5404a9b6adc74cc21140, type: 3}
   LayerGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   LayerGrid:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
