@@ -3,32 +3,33 @@ using UnityEngine;
 
 public class PlayerInput
 {
-    public Action<Vector3> OnEventClick;
+    public Action<Vector3> OnUpdate;
+    public Action<Vector3> OnClick;
     
     private Transform _pivot;
     private Transform _point;
     private Transform _forward;
     
-    private Vector3 inputAxis = Vector3.zero;
-    private Vector3 position = Vector3.zero;
+    private Vector3 _inputAxis = Vector3.zero;
+    private Vector3 _position = Vector3.zero;
     
-    private Vector3 rotationAxis = Vector3.zero;
-    private Vector3 rotation = Vector3.zero;
-    private Vector3 forward = Vector3.zero;
-    private float scrollValue = 0f;
+    private Vector3 _rotationAxis = Vector3.zero;
+    private Vector3 _rotation = Vector3.zero;
+    private Vector3 _forwardAxis = Vector3.zero;
+    private float _scrollValue = 0f;
 
-    private Ray ray;
-    private RaycastHit hit;
-
-    private GameConfig _config;
+    private Ray _ray;
+    private RaycastHit _hit;
+    private LayerMask _layerHit;
+    
     private InputSettings.InputData _settings;
     private PlayerCamera _camera;
     
-    public PlayerInput(InputSettings.InputData settings, PlayerCamera camera, Transform pivot, Transform point, Transform forward)
+    public PlayerInput(InputSettings.InputData settings, PlayerCamera camera, LayerMask layerHit, Transform pivot, Transform point, Transform forward)
     {
-        _config = Configs.Get<GameConfig>();
         _settings = settings;
         _camera = camera;
+        _layerHit = layerHit;
         _pivot = pivot;
         _point = point;
         _forward = forward;
@@ -38,17 +39,17 @@ public class PlayerInput
     {
         DoMove();
         DoRotate();
-        DoEvenets();
+        DoRay();
     }
 
     private void DoMove()
     {
-        inputAxis.x = Input.GetAxis("Horizontal") * _settings.SpeedMove * Time.deltaTime;
-        inputAxis.z = Input.GetAxis("Vertical") * _settings.SpeedMove * Time.deltaTime;
+        _inputAxis.x = Input.GetAxis("Horizontal") * _settings.SpeedMove * Time.deltaTime;
+        _inputAxis.z = Input.GetAxis("Vertical") * _settings.SpeedMove * Time.deltaTime;
 
-        position = Vector3.ClampMagnitude(position + _forward.TransformDirection(inputAxis), _settings.ClampAreaMovement);
+        _position = Vector3.ClampMagnitude(_position + _forward.TransformDirection(_inputAxis), _settings.ClampAreaMovement);
 
-        _point.localPosition = position;
+        _point.localPosition = _position;
     }
     
     private void DoRotate()
@@ -57,36 +58,36 @@ public class PlayerInput
         {
             SetCurcor(CursorMode.Rotate);
                 
-            rotationAxis.x = Input.GetAxis("Mouse X") * _settings.RotateHorizontal * Time.deltaTime;
-            rotationAxis.z = -Input.GetAxis("Mouse Y") * _settings.RotateVertical * Time.deltaTime;
+            _rotationAxis.x = Input.GetAxis("Mouse X") * _settings.RotateHorizontal * Time.deltaTime;
+            _rotationAxis.z = -Input.GetAxis("Mouse Y") * _settings.RotateVertical * Time.deltaTime;
 
-            rotation.y += rotationAxis.x;
-            rotation.x = Mathf.Clamp(rotation.x + rotationAxis.z, _settings.ClampMinVertical, _settings.ClampMaxVertical);
+            _rotation.y += _rotationAxis.x;
+            _rotation.x = Mathf.Clamp(_rotation.x + _rotationAxis.z, _settings.ClampMinVertical, _settings.ClampMaxVertical);
 
-            forward.y = rotation.y;
+            _forwardAxis.y = _rotation.y;
                 
-            _point.localRotation = Quaternion.Euler(rotation);
-            _forward.localRotation = Quaternion.Euler(forward);
+            _point.localRotation = Quaternion.Euler(_rotation);
+            _forward.localRotation = Quaternion.Euler(_forwardAxis);
         }
         else
         {
             SetCurcor(CursorMode.Free);
         }
 
-        scrollValue += Input.mouseScrollDelta.y * _settings.SpeedScroll * Time.deltaTime;
-        scrollValue = Mathf.Clamp(scrollValue, _settings.ScrollMinDistance, _settings.ScrollMaxDistance);
-        _camera.SetHeight(-scrollValue);
+        _scrollValue += Input.mouseScrollDelta.y * _settings.SpeedScroll * Time.deltaTime;
+        _scrollValue = Mathf.Clamp(_scrollValue, _settings.ScrollMinDistance, _settings.ScrollMaxDistance);
+        _camera.SetHeight(-_scrollValue);
     }
 
-    private void DoEvenets()
+    private void DoRay()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(_ray, out _hit, Mathf.Infinity, _layerHit);
             
-            if(Physics.Raycast(ray, out hit, Mathf.Infinity, _config.LayerGround))
-                OnEventClick?.Invoke(hit.point);
-        }
+        if (Input.GetMouseButtonDown(0))
+            OnClick?.Invoke(_hit.point);
+        else
+            OnUpdate?.Invoke(_hit.point);
     }
 
     private void SetCurcor(CursorMode mode)

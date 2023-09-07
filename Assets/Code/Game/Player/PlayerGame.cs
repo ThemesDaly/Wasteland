@@ -21,6 +21,7 @@ public class PlayerGame : BaseMonoController
         
         InputSystem = new PlayerInput(Configs.Get<InputSettings>().Game, 
                                       Services.Game.Context.PlayerCamera, 
+                                      Configs.Get<GameConfig>().LayerGround,
                                       _pivot,
                                       _point, 
                                       _forward);

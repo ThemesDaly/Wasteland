@@ -19,3 +19,6 @@ MonoBehaviour:
   LayerGround:
     serializedVersion: 2
     m_Bits: 64
+  LayerGrid:
+    serializedVersion: 2
+    m_Bits: 0

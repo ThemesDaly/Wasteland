@@ -20,7 +20,8 @@ public class PlayerConstructor : BaseMonoController
         _forward.SetParent(transform);
         
         InputSystem = new PlayerInput(Configs.Get<InputSettings>().Constructor, 
-                                      Services.Constructor.Context.PlayerCamera, 
+                                      Services.Constructor.Context.PlayerCamera,
+                                      Configs.Get<GameConfig>().LayerGrid,
                                       _pivot,
                                       _point, 
                                       _forward);
