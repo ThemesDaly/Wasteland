@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2985475338176757393}
-  - component: {fileID: 2985475338176757392}
+  - component: {fileID: -6584061510271490880}
   m_Layer: 0
-  m_Name: PlayerModule
+  m_Name: PlayerConstructorController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2985475338176757392
+--- !u!114 &-6584061510271490880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,15 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2985475338176757395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71dfd4c5ef6c4ee6baa2a0f76fcb0ed2, type: 3}
+  m_Script: {fileID: 11500000, guid: 11e991b97c5e43c79ccd78e5c893b5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMove: 7.5
-  _speedRotateVertical: 500
-  _speedRotateHorizontal: 500
-  _clampVerticalMin: 20
-  _clampVerticalMax: 80
-  _clampAreaMovement: 10
-  _scrollMinDistance: 5
-  _scrollMaxDistance: 20
-  _scrollSpeed: 10

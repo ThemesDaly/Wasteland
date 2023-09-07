@@ -5,12 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = AssetDefineConstants.CONFIGS + "GameConfig", fileName = "GameConfig")]
 public class GameConfig : Config
 {
-    [BoxGroup("Prefabs")] public CameraController CameraController;
-    [BoxGroup("Prefabs")] public PlayerController PlayerController;
+    [BoxGroup("Database")] public ModuleAssets Modules;
+    
+    [BoxGroup("Controller")] public PlayerCamera playerCamera;
+    [BoxGroup("Controller")] public PlayerGame PlayerGameController;
+    [BoxGroup("Controller")] public PlayerConstructor PlayerConstructorController;
 
     [BoxGroup("World")] public LayerMask LayerGround;
-
-    public ModuleAssets Modules;
 
     public override void Init()
     {

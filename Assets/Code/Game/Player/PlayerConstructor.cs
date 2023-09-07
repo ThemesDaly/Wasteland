@@ -1,8 +1,6 @@
-using System.Collections;
-using NaughtyAttributes;
 using UnityEngine;
 
-public class PlayerController : BaseMonoController
+public class PlayerConstructor : BaseMonoController
 {
     private PlayerInput InputSystem; 
     
@@ -21,9 +19,13 @@ public class PlayerController : BaseMonoController
         _forward = new GameObject("Forward").transform;
         _forward.SetParent(transform);
         
-        InputSystem = new PlayerInput(_pivot,_point, _forward);
+        InputSystem = new PlayerInput(Configs.Get<InputSettings>().Constructor, 
+                                      Services.Constructor.Context.PlayerCamera, 
+                                      _pivot,
+                                      _point, 
+                                      _forward);
 
-        Services.Game.Context.Camera.SetFollow(_point);
+        Services.Constructor.Context.PlayerCamera.SetFollow(_point);
     }
 
     public override void DeInit()

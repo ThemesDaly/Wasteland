@@ -24,9 +24,9 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 738f2e8a31fd94a4a9c3391bfa6aa48f, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9e6252936e1f94ecab453aa124c42702, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.536444, g: 0.07318098, b: 0.53644365, a: 1}
+  m_IndirectSpecularColor: {r: 0.05778324, g: 0.079342835, b: 0.2619629, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -422,11 +422,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d41e92aa995594b9c9129b449ec2aa05, type: 2}
     - target: {fileID: 919132149155446097, guid: 71325b59a373941dd8fe20883da6c757, type: 3}
       propertyPath: m_Name
-      value: Bg_cyclo
+      value: Background
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 71325b59a373941dd8fe20883da6c757, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

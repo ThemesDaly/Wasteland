@@ -18,11 +18,19 @@ public class ConstructorService: MonoBehaviour, IConstructorService
     private void Awake()
     {
         Instance = this;
+
+        Context = new ConstructorContext();
+    }
+
+    private void Update()
+    {
+        Context.Execute();
     }
 
     public void Load()
     {
-        
+        Context.Init();
+        Context.SpawnPlayer();
     }
 
     public void Save()

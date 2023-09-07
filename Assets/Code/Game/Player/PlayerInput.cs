@@ -21,13 +21,14 @@ public class PlayerInput
     private RaycastHit hit;
 
     private GameConfig _config;
-    private GameSettings _settings;
+    private InputSettings.InputData _settings;
+    private PlayerCamera _camera;
     
-    public PlayerInput(Transform pivot, Transform point, Transform forward)
+    public PlayerInput(InputSettings.InputData settings, PlayerCamera camera, Transform pivot, Transform point, Transform forward)
     {
         _config = Configs.Get<GameConfig>();
-        _settings = Configs.Get<GameSettings>();
-
+        _settings = settings;
+        _camera = camera;
         _pivot = pivot;
         _point = point;
         _forward = forward;
@@ -74,7 +75,7 @@ public class PlayerInput
 
         scrollValue += Input.mouseScrollDelta.y * _settings.SpeedScroll * Time.deltaTime;
         scrollValue = Mathf.Clamp(scrollValue, _settings.ScrollMinDistance, _settings.ScrollMaxDistance);
-        Services.Game.Context.Camera.SetHeight(-scrollValue);
+        _camera.SetHeight(-scrollValue);
     }
 
     private void DoEvenets()

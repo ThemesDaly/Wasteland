@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9dc6c88569d41949d9231b795794597, type: 3}
+  m_Name: InputSettings
+  m_EditorClassIdentifier: 
+  Game:
+    SpeedMove: 100
+    ClampAreaMovement: 10
+    RotateVertical: 500
+    RotateHorizontal: 500
+    ClampMinVertical: 20
+    ClampMaxVertical: 80
+    ScrollMinDistance: 5
+    ScrollMaxDistance: 40
+    SpeedScroll: 10
+  Constructor:
+    SpeedMove: 100
+    ClampAreaMovement: 10
+    RotateVertical: 500
+    RotateHorizontal: 500
+    ClampMinVertical: -80
+    ClampMaxVertical: 80
+    ScrollMinDistance: 5
+    ScrollMaxDistance: 40
+    SpeedScroll: 10

@@ -1,20 +1,23 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-public class GameContext
+public class GameContext : ICoreSystem
 {
-    public CameraController Camera { get; private set; }
+    public PlayerCamera PlayerCamera { get; private set; }
     
-    public PlayerController Player { get; private set; }
+    public PlayerGame PlayerGame { get; private set; }
 
-    private static readonly Dictionary<Type, BaseMonoController> _dataModules = new Dictionary<Type, BaseMonoController>();
+    private static readonly Dictionary<Type, BaseMonoController> _controllers = new Dictionary<Type, BaseMonoController>();
 
     public void Init()
     {
-        // SpawnCamera();
-        // SpawnPlayer();
+        
+    }
+
+    public void DeInit()
+    {
+        
     }
 
     public void Execute()
@@ -22,24 +25,15 @@ public class GameContext
         
     }
 
-    private void SpawnCamera()
+    public void SpawnPlayer()
     {
-        Camera = SpawnManager<CameraController>(Configs.Get<GameConfig>().CameraController);
-    }
-
-    private void SpawnPlayer()
-    {
-        Player = SpawnManager<PlayerController>(Configs.Get<GameConfig>().PlayerController);
-    }
-    
-    private static T SpawnManager<T>(BaseMonoController prefabMonoController) where T : BaseMonoController
-    {
-        Type type = typeof(T);
-        BaseMonoController monoController = Object.Instantiate(prefabMonoController);
+        if(PlayerGame != null)
+            GameObject.Destroy(PlayerGame.gameObject);
         
-        monoController.Init();
-        _dataModules.Add(type, monoController);
-
-        return monoController as T;
+        if(PlayerCamera != null)
+            GameObject.Destroy(PlayerCamera.gameObject);
+        
+        PlayerCamera = ContextUtils.SpawnManager<PlayerCamera>(_controllers, Configs.Get<GameConfig>().playerCamera);
+        PlayerGame = ContextUtils.SpawnManager<PlayerGame>(_controllers, Configs.Get<GameConfig>().PlayerGameController);
     }
 }

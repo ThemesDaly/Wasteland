@@ -2,7 +2,7 @@ using Cinemachine;
 using NaughtyAttributes;
 using UnityEngine;
 
-public class CameraController : BaseMonoController
+public class PlayerCamera : BaseMonoController
 {
     [BoxGroup("View"), SerializeField] private Transform _rootNode;
     [BoxGroup("View"), SerializeField] private Transform _pointNode;
