@@ -4,7 +4,9 @@ public class Module : BaseDatabaseItem, IStringIdItem
     
     public override void DatabaseInit(string id, string name)
     {
-        
+        BaseData = new ModuleBaseData();
+        BaseData.Id = id;
+        BaseData.Name = name;
     }
 
     public string ItemId => GetDatabaseId();

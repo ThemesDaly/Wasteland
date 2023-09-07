@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class RuntimeInit
+public static class Runtime
 {
     [RuntimeInitializeOnLoadMethod]
     private static void Init()
