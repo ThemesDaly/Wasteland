@@ -7,9 +7,10 @@ public class GameConfig : Config
 {
     [BoxGroup("Database")] public ModuleAssets Modules;
     
-    [BoxGroup("Controller")] public PlayerCamera playerCamera;
+    [BoxGroup("Controller")] public PlayerCamera PlayerCamera;
     [BoxGroup("Controller")] public PlayerGame PlayerGameController;
     [BoxGroup("Controller")] public PlayerConstructor PlayerConstructorController;
+    [BoxGroup("Controller")] public GridView GridView;
 
     [BoxGroup("World")] public LayerMask LayerGround;
     [BoxGroup("World")] public LayerMask LayerGrid;

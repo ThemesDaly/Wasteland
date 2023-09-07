@@ -14,7 +14,7 @@ public class ConstructorService: MonoBehaviour, IConstructorService
     public static IConstructorService Instance { get; private set; }
     
     public ConstructorContext Context { get; private set; }
-    
+
     private void Awake()
     {
         Instance = this;

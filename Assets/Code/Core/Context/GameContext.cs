@@ -33,7 +33,7 @@ public class GameContext : ICoreSystem
         if(PlayerCamera != null)
             GameObject.Destroy(PlayerCamera.gameObject);
         
-        PlayerCamera = ContextUtils.SpawnManager<PlayerCamera>(_controllers, Configs.Get<GameConfig>().playerCamera);
+        PlayerCamera = ContextUtils.SpawnManager<PlayerCamera>(_controllers, Configs.Get<GameConfig>().PlayerCamera);
         PlayerGame = ContextUtils.SpawnManager<PlayerGame>(_controllers, Configs.Get<GameConfig>().PlayerGameController);
     }
 }

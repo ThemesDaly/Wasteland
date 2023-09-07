@@ -8,7 +8,7 @@ public class PlayerConstructor : BaseMonoController
     private Transform _point;
     private Transform _forward;
 
-    public ConstructorMonoObject _target;
+    public GridObject _target;
 
     public override void Init()
     {
@@ -32,7 +32,9 @@ public class PlayerConstructor : BaseMonoController
 
         InputSystem.OnUpdate += Enter;
 
-        _target = GameObject.FindFirstObjectByType<ConstructorMonoObject>();
+        _target = GameObject.FindFirstObjectByType<GridObject>();
+
+        _pivot.position = new Vector3(Grid.GRID_SIZE_X, 0, Grid.GRID_SIZE_Z) / 2F;
     }
 
     public override void DeInit()
@@ -45,9 +47,11 @@ public class PlayerConstructor : BaseMonoController
         InputSystem.Execute();
     }
 
+    public void SetCenterGrid(Vector3 position) => _pivot.position = position;
+
     private void Enter(Vector3 position)
     {
-        _target.transform.position = position.NormalizeD();
-        Debug.Log($"Enter: {position}");
+        Services.Constructor.Context.MoveObject(_target, position.Vector3ToCell());
+        // Debug.Log($"Enter: {position}");
     }
 }

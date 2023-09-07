@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grid
+  m_Name: Grid 1
   m_Shader: {fileID: 4800000, guid: 62ec4df7b9bdb594ebec618fa399cb6f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,8 +42,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoMap:
-        m_Texture: {fileID: 2800000, guid: 736c5329b80d83c4484615178b29c247, type: 3}
-        m_Scale: {x: 64, y: 64}
+        m_Texture: {fileID: 2800000, guid: 1315ee04e75c543f78a436f5e67613b5, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -118,7 +118,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 736c5329b80d83c4484615178b29c247, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1315ee04e75c543f78a436f5e67613b5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -290,8 +290,8 @@ Material:
     - _ZTest: 4
     - _ZWrite: 0
     m_Colors:
-    - _AlbedoColor: {r: 1, g: 1, b: 1, a: 0.09803922}
-    - _Color: {r: 1, g: 1, b: 1, a: 0.09803922}
+    - _AlbedoColor: {r: 0.105882324, g: 0.11764703, b: 0.16470584, a: 0.09803922}
+    - _Color: {r: 0.105882294, g: 0.117646985, b: 0.16470581, a: 0.09803922}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 0.033018887, b: 0.033018887, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
