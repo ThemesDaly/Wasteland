@@ -8,9 +8,9 @@ public class ConstructorUI : BaseCanvasUI
     {
         base.Init(canvas);
 
-        _propetyCellObject.DisplayTitle("Cell Object");
-        ServicesEvents.Constructor.OnDrag += (GridObject g) => { _propetyCellObject.DisplayValue("Selected"); };
-        ServicesEvents.Constructor.OnPointIn += (GridObject g) => { _propetyCellObject.DisplayValue("Point In"); };
-        ServicesEvents.Constructor.OnPointOut += (GridObject g) => { _propetyCellObject.DisplayValue("Free"); };
+        _propetyCellObject.DisplayTitle("Object");
+        ServicesEvents.Constructor.OnDrag += (GridObject g) => { _propetyCellObject.DisplayValue("Drag"); };
+        ServicesEvents.Constructor.OnPointIn += (GridObject g) => { _propetyCellObject.DisplayValue("Enter"); };
+        ServicesEvents.Constructor.OnPointOut += (GridObject g) => { _propetyCellObject.DisplayValue("null"); };
     }
 }

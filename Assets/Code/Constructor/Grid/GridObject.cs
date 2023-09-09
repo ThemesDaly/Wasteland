@@ -9,6 +9,8 @@ public class GridObject : MonoBehaviour
 {
     [SerializeField] private ConstructorBounds _bounds;
 
+    private IView[] _views;
+
     private BoxCollider _collider;
 
     private void Awake()
@@ -22,8 +24,14 @@ public class GridObject : MonoBehaviour
 
         _collider.center = center;
         _collider.size = _bounds.Size;
+
+        _views = GetComponents<IView>();
+        _views.Init();
+
+        ServicesEvents.Constructor.OnPointIn += PointIn;
+        ServicesEvents.Constructor.OnPointOut += PointOut;
     }
-    
+
     private void OnMouseDown()
     {
         Services.Constructor.Context.Drag(this);
@@ -32,11 +40,28 @@ public class GridObject : MonoBehaviour
     private void OnMouseEnter()
     {
         Services.Constructor.Context.PointIn(this);
+        _views.TurnOn();
     }
 
     private void OnMouseExit()
     {
         Services.Constructor.Context.PointOut(this);
+    }
+    
+    private void PointIn(GridObject Object)
+    {
+        if(!Object.Equals(this))
+            return;
+        
+        _views.TurnOn();
+    }
+
+    private void PointOut(GridObject Object)
+    {
+        if(!Object.Equals(this))
+            return;   
+        
+        _views.TurnOff();
     }
 
     public void MoveTo(Vector3 position)

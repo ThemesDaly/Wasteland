@@ -42,8 +42,6 @@ public class ConstructorContext : ICoreSystem
         
         _targetObject = Object;
         ServicesEvents.Constructor.Drag(Object);
-        
-        Debug.Log($"Selected");
     }
 
     public void Drop(GridObject Object)
@@ -53,24 +51,22 @@ public class ConstructorContext : ICoreSystem
 
         _targetObject = null;
         ServicesEvents.Constructor.Drop(Object);
-        
-        Debug.Log($"Free");
     }
 
     public void PointIn(GridObject Object)
     {
-        // if(_targetObject != null)
-            // return;
+        if(_targetObject != null)
+            return;
         
-        Debug.Log($"Highlighted");
+        ServicesEvents.Constructor.PointIn(Object);
     }
     
     public void PointOut(GridObject Object)
     {
-        // if(_targetObject != null)
-            // return;
+        if(_targetObject != null)
+            return;
         
-        Debug.Log($"DeHighlighted");
+        ServicesEvents.Constructor.PointOut(Object);
     }
 
     public void MoveObject(GridObject Object, Vector3 position)
