@@ -11,10 +11,14 @@ public class ConstructorContext : ICoreSystem
     public GridPlane GridPlane { get; private set; }
     
     public Grid Grid { get; private set; }
+
+    private ConstructorBehaviour Behaviour;
     
     private static readonly Dictionary<Type, BaseMonoController> _controllers = new Dictionary<Type, BaseMonoController>();
 
     private GridObject _targetObject;
+
+    private Cell[] _cells;
 
     public void Init()
     {
@@ -22,6 +26,8 @@ public class ConstructorContext : ICoreSystem
         Grid.Init();
         
         GridPlane = ContextUtils.SpawnManager<GridPlane>(_controllers, Configs.Get<GameConfig>().gridPlane);
+
+        Behaviour = new ConstructorBehaviour(this);
     }
 
     public void DeInit()
@@ -41,6 +47,8 @@ public class ConstructorContext : ICoreSystem
             return;
         
         _targetObject = Object;
+        _cells = Object.GetBounds();
+        
         ServicesEvents.Constructor.Drag(Object);
     }
 
@@ -49,7 +57,15 @@ public class ConstructorContext : ICoreSystem
         if(_targetObject == null)
             return;
 
+        foreach (var cell in _cells)
+            Grid[cell].Remove(Object);
+        
+        foreach (var cell in Object.GetBounds())
+            Grid[cell].Add(Object);
+        
         _targetObject = null;
+        _cells = null;
+        
         ServicesEvents.Constructor.Drop(Object);
     }
 
@@ -71,10 +87,11 @@ public class ConstructorContext : ICoreSystem
 
     public void MoveObject(GridObject Object, Vector3 position)
     {
-        Object.MoveTo(position.Vector3ToCell());
+        bool isAllowed = Behaviour.TryObject(Object);
 
-        // Cell pivot = Cell.Create(position);
-        // Grid[pivot].IsBusy = true;
+        Object.MoveTo(position.Vector3ToCell());
+        
+        Debug.Log($"IsAllowed: {isAllowed}");
     }
     
     public void SpawnPlayer()

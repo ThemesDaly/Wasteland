@@ -40,7 +40,6 @@ public class GridObject : MonoBehaviour
     private void OnMouseEnter()
     {
         Services.Constructor.Context.PointIn(this);
-        _views.TurnOn();
     }
 
     private void OnMouseExit()

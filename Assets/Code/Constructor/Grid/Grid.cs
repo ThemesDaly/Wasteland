@@ -19,10 +19,10 @@ public sealed class Grid
         
         for (int y = 0; y < GRID_SIZE_X; y++)
         {
-            grid[y] = new GridCell[GRID_SIZE_X][];
+            grid[y] = new GridCell[GRID_SIZE_Y][];
 
-            for (int z = 0; z < GRID_SIZE_X; z++)
-                grid[y][z] = new GridCell[GRID_SIZE_X];
+            for (int z = 0; z < GRID_SIZE_Y; z++)
+                grid[y][z] = new GridCell[GRID_SIZE_Z];
         }
     }
 
@@ -30,9 +30,9 @@ public sealed class Grid
     {
         for (int x = 0; x < GRID_SIZE_X; x++)
         {
-            for (int y = 0; y < GRID_SIZE_X; y++)
+            for (int y = 0; y < GRID_SIZE_Y; y++)
             {
-                for (int z = 0; z < GRID_SIZE_X; z++)
+                for (int z = 0; z < GRID_SIZE_Z; z++)
                 {
                     grid[x][y][z] = new GridCell(x, y, z);
                 }
@@ -42,6 +42,8 @@ public sealed class Grid
 
     private bool IsInGrid(Vector3 v)
     {
-        return true;
+        return v.x >= 0 && v.x < GRID_SIZE_X &&
+               v.z >= 0 && v.z < GRID_SIZE_Z &&
+               v.y >= 0 && v.y < GRID_SIZE_Y;
     }
 }
