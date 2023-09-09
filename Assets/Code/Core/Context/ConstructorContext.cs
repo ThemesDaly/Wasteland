@@ -58,10 +58,12 @@ public class ConstructorContext : ICoreSystem
             return;
 
         foreach (var cell in _cells)
-            Grid[cell].Remove(Object);
+            if(Grid[cell] != null)
+                Grid[cell].Remove(Object);
         
         foreach (var cell in Object.GetBounds())
-            Grid[cell].Add(Object);
+            if(Grid[cell] != null)
+                Grid[cell].Add(Object);
         
         _targetObject = null;
         _cells = null;
@@ -87,9 +89,13 @@ public class ConstructorContext : ICoreSystem
 
     public void MoveObject(GridObject Object, Vector3 position)
     {
+        if(position == Vector3.zero)
+            return;
+        
         bool isAllowed = Behaviour.TryObject(Object);
 
         Object.MoveTo(position.ToCell());
+        Object.Data.result = isAllowed ? GridObjectData.Result.Unlock : GridObjectData.Result.Failed;
         
         Debug.Log($"IsAllowed: {isAllowed}");
     }

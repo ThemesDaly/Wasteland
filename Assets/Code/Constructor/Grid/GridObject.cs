@@ -7,9 +7,13 @@ using UnityEditor;
 
 public class GridObject : MonoBehaviour
 {
-    [SerializeField] private ConstructorBounds _bounds;
+    [SerializeField] private GridObjectData _data;
+    [SerializeField] private GridObjectView _view;
+    [SerializeField] private GridObjectBounds _bounds;
 
-    private IView[] _views;
+    public GridObjectData Data => _data;
+
+    private Vector3 center;
 
     private BoxCollider _collider;
 
@@ -17,19 +21,24 @@ public class GridObject : MonoBehaviour
     {
         _collider = gameObject.AddComponent<BoxCollider>();
 
-        Vector3 center = _bounds.Size / 2;
+        center = _bounds.Size / 2;
         center.x -= 0.5F;
         center.y -= 0.5F;
         center.z = -center.z + 0.5F;
 
         _collider.center = center;
         _collider.size = _bounds.Size;
-
-        _views = GetComponents<IView>();
-        _views.Init();
+        
+        _view.Init(_data.target);
 
         ServicesEvents.Constructor.OnPointIn += PointIn;
         ServicesEvents.Constructor.OnPointOut += PointOut;
+    }
+
+    private void Update()
+    {
+        _data.target.position = transform.position + center;
+        _view.SetResult(_data.result);
     }
 
     private void OnMouseDown()
@@ -52,7 +61,7 @@ public class GridObject : MonoBehaviour
         if(!Object.Equals(this))
             return;
         
-        _views.TurnOn();
+        _view.SetActive(true);
     }
 
     private void PointOut(GridObject Object)
@@ -60,7 +69,7 @@ public class GridObject : MonoBehaviour
         if(!Object.Equals(this))
             return;   
         
-        _views.TurnOff();
+        _view.SetActive(false);
     }
 
     public void MoveTo(Vector3 position)

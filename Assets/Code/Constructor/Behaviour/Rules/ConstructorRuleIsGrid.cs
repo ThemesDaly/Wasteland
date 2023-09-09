@@ -4,9 +4,7 @@ public class ConstructorRuleIsGrid : ConstructorRule
 
     public override bool Execute(GridObject Object)
     {
-        var cells = Object.GetBounds();
-
-        foreach (var cell in cells)
+        foreach (var cell in Object.GetBounds())
             if (_context.Grid[cell] == null)
                 return false;
         

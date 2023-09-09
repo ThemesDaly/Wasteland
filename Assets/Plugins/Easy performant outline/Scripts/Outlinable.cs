@@ -432,6 +432,20 @@ namespace EPOOutline
                     TryAddTarget(new OutlineTarget(renderer, index));
             }
         }
+        
+        public void AddCustomToRenderingList(Renderer[] renderers)
+        {
+            outlineTargets.Clear();
+            foreach (var renderer in renderers)
+            {
+                if (!MatchingMode(renderer, RenderersAddingMode.All))
+                    continue;
+
+                var submeshesCount = GetSubmeshCount(renderer);
+                for (var index = 0; index < submeshesCount; index++)
+                    TryAddTarget(new OutlineTarget(renderer, index));
+            }
+        }
 
         private void Update()
         {

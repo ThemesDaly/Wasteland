@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public sealed class ConstructorBounds
+public sealed class GridObjectBounds
 {
     [SerializeField] private Vector3 _size;
 
@@ -10,7 +10,8 @@ public sealed class ConstructorBounds
     {
         get
         {
-            _size.ToCell();
+            _size = _size.ToCell();
+            
             return _size;
         }
     }
