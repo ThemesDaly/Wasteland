@@ -26,17 +26,17 @@ public class GridObject : MonoBehaviour
     
     private void OnMouseDown()
     {
-        
+        Services.Constructor.Context.Drag(this);
     }
 
     private void OnMouseEnter()
     {
-        
+        Services.Constructor.Context.PointIn(this);
     }
 
     private void OnMouseExit()
     {
-        
+        Services.Constructor.Context.PointOut(this);
     }
 
     public void MoveTo(Vector3 position)
@@ -77,7 +77,7 @@ public class GridObject : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         var color = new Color(1F, 1F, 0F, 0.5F); 
-        DrawCells(color);
+        DrawCells(color / 2f);
         DrawBound(color, true);
     }
     
@@ -105,7 +105,7 @@ public class GridObject : MonoBehaviour
         var cells = GetBounds();
 
         foreach (var cell in cells)
-            Gizmos.DrawCube(cell.Position, Vector3.one / 2);
+            Gizmos.DrawCube(cell.Position, Vector3.one * 0.95F);
     }
 
 #endif

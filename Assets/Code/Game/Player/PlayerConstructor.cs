@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerConstructor : BaseMonoController
@@ -8,7 +9,9 @@ public class PlayerConstructor : BaseMonoController
     private Transform _point;
     private Transform _forward;
 
-    public GridObject _target;
+    private GridObject _target;
+    
+    private Vector3 _rayPoint;
 
     public override void Init()
     {
@@ -30,11 +33,11 @@ public class PlayerConstructor : BaseMonoController
 
         Services.Constructor.Context.PlayerCamera.SetFollow(_point);
 
-        InputSystem.OnUpdate += Enter;
-
-        _target = GameObject.FindFirstObjectByType<GridObject>();
-
         _pivot.position = new Vector3(Grid.GRID_SIZE_X, 0, Grid.GRID_SIZE_Z) / 2F;
+        
+        InputSystem.OnUpdate += Enter;
+        ServicesEvents.Constructor.OnDrag += Selected;
+        ServicesEvents.Constructor.OnDrop += Drop;
     }
 
     public override void DeInit()
@@ -45,13 +48,27 @@ public class PlayerConstructor : BaseMonoController
     public override void Execute()
     {
         InputSystem.Execute();
+
+        if (_target)
+        {
+            if(Input.GetMouseButtonUp(0))
+                Services.Constructor.Context.Drop(_target);
+            else
+                Services.Constructor.Context.MoveObject(_target, _rayPoint);
+        }
     }
 
-    public void SetCenterGrid(Vector3 position) => _pivot.position = position;
-
-    private void Enter(Vector3 position)
+    private void Selected(GridObject Object)
     {
-        Services.Constructor.Context.MoveObject(_target, position.Vector3ToCell());
-        // Debug.Log($"Enter: {position}");
+        _target = Object;
     }
+
+    private void Drop(GridObject Object)
+    {
+        _target = null;
+    }
+
+    private void Enter(Vector3 position) => _rayPoint = position;
+
+    public void SetCenter(Vector3 position) => _pivot.position = position;
 }
