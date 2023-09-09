@@ -68,7 +68,11 @@ public class PlayerConstructor : BaseMonoController
         _target = null;
     }
 
-    private void Enter(Vector3 position) => _rayPoint = position;
+    private void Enter(Vector3 position)
+    {
+        _rayPoint = position;
+        ServicesEvents.Constructor.CursorCell(position);
+    }
 
     public void SetCenter(Vector3 position) => _pivot.position = position;
 }

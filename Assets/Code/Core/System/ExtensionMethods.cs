@@ -29,7 +29,7 @@ public static class ExtensionMethods
         return new Vector3(v.x, v.y, z);
     }
 
-    public static Vector3 Vector3ToCell(this Vector3 v)
+    public static Vector3 ToCell(this Vector3 v)
     {
         return new Vector3((int)v.x, (int)v.y, (int)v.z); 
     }

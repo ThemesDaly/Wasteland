@@ -21,7 +21,7 @@ public struct Cell
     
     public Cell(Vector3 vector)
     {
-        var cellVector = vector.Vector3ToCell();
+        var cellVector = vector.ToCell();
 
         X = (int)Math.Round(cellVector.x);
         Y = (int)Math.Round(cellVector.y);

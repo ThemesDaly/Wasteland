@@ -10,7 +10,7 @@ public sealed class ConstructorBounds
     {
         get
         {
-            _size.Vector3ToCell();
+            _size.ToCell();
             return _size;
         }
     }

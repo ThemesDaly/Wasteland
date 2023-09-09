@@ -89,7 +89,7 @@ public class ConstructorContext : ICoreSystem
     {
         bool isAllowed = Behaviour.TryObject(Object);
 
-        Object.MoveTo(position.Vector3ToCell());
+        Object.MoveTo(position.ToCell());
         
         Debug.Log($"IsAllowed: {isAllowed}");
     }
