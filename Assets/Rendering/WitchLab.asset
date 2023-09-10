@@ -18,13 +18,13 @@ MonoBehaviour:
     value: 1
   mode:
     overrideState: 1
-    value: 1
+    value: 0
   intensity:
     overrideState: 1
-    value: 1
+    value: 2
   color:
-    overrideState: 0
-    value: {r: 0, g: 0, b: 0, a: 1}
+    overrideState: 1
+    value: {r: 0.070398726, g: 0.10314071, b: 0.13207549, a: 1}
   ambientOnly:
     overrideState: 0
     value: 0
@@ -44,10 +44,10 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   radius:
-    overrideState: 0
+    overrideState: 1
     value: 0.25
   quality:
-    overrideState: 0
+    overrideState: 1
     value: 2
 --- !u!114 &11400000
 MonoBehaviour:
@@ -83,7 +83,7 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   gradingMode:
-    overrideState: 0
+    overrideState: 1
     value: 1
   externalLut:
     overrideState: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
     defaultState: 1
   tonemapper:
     overrideState: 1
-    value: 2
+    value: 1
   toneCurveToeStrength:
     overrideState: 0
     value: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   postExposure:
-    overrideState: 1
+    overrideState: 0
     value: 1
   contrast:
     overrideState: 0
@@ -1389,7 +1389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -1441,25 +1441,25 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   mode:
-    overrideState: 0
+    overrideState: 1
     value: 0
   color:
-    overrideState: 0
-    value: {r: 0, g: 0, b: 0, a: 1}
+    overrideState: 1
+    value: {r: 0.06679424, g: 0.13294193, b: 0.1792453, a: 1}
   center:
     overrideState: 0
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.2
+    value: 0.45
   smoothness:
-    overrideState: 0
-    value: 0.2
-  roundness:
-    overrideState: 0
+    overrideState: 1
     value: 1
+  roundness:
+    overrideState: 1
+    value: 0.72
   rounded:
-    overrideState: 0
+    overrideState: 1
     value: 0
   mask:
     overrideState: 0
