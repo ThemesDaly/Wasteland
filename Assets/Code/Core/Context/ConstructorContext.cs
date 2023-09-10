@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class ConstructorContext : ICoreSystem
 {
@@ -17,6 +18,8 @@ public class ConstructorContext : ICoreSystem
     private static readonly Dictionary<Type, BaseMonoController> _controllers = new Dictionary<Type, BaseMonoController>();
 
     private GridObject _targetObject;
+    
+    // private ModuleContainer
 
     private Vector3 _offsetPosition;
     
@@ -41,6 +44,14 @@ public class ConstructorContext : ICoreSystem
     {
         foreach (var controller in _controllers)
             controller.Value.Execute();
+    }
+
+    public void AddModule(string inventoryId)
+    {
+        var moduleContainer = Configs.Get<GameConfig>().Modules.GetById(inventoryId).BaseData.Container;
+        var prefabContainer = Object.Instantiate(moduleContainer);
+        prefabContainer.transform.position = PlayerGame.Position;
+        prefabContainer.Init();
     }
     
     public void Drag(GridObject Object)

@@ -4,9 +4,10 @@ using UnityEngine;
 [Serializable]
 public class GridObjectData
 {
-    public Transform target;
-
     public Result result;
+    public Transform Target { get; private set; }
+
+    public void SetTarget(Transform target) => Target = target;
     
     public enum Result : int
     {

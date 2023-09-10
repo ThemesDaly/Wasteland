@@ -306,4 +306,5 @@ MonoBehaviour:
     _successful: {fileID: 7000498260983022046}
     _failed: {fileID: 6101375189033802891}
   _bounds:
-    _size: {x: 2, y: 1, z: 4}
+    _size: {x: 1, y: 1, z: 1}
+  _links: []

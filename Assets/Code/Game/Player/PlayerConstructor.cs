@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerConstructor : BaseMonoController
 {
+    public Vector3 Position => InputSystem.Pivot.position;
+    
     private PlayerInput InputSystem;
     
     private GridObject _target;

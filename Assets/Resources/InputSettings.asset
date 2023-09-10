@@ -23,12 +23,12 @@ MonoBehaviour:
     ScrollMaxDistance: 40
     SpeedScroll: 50
   Constructor:
-    SpeedMove: 25
+    SpeedMove: 5
     ClampAreaMovement: 64
     RotateVertical: 500
     RotateHorizontal: 500
-    ClampMinVertical: -80
+    ClampMinVertical: 0
     ClampMaxVertical: 80
     ScrollMinDistance: 0
     ScrollMaxDistance: 40
-    SpeedScroll: 50
+    SpeedScroll: 25

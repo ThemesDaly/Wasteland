@@ -21,7 +21,7 @@ public class ConstructorInventoryUI : BaseCanvasUI
     private ConstructorItemUI CreateItem(Module module)
     {
         var instance = Instantiate(_masterItem, _holder);
-        instance.Init(null, module.BaseData.Name);
+        instance.Init(module);
 
         return instance;
     }

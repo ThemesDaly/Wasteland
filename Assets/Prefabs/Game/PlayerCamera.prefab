@@ -62,7 +62,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0, y: 5, z: -5}
   VerticalArmLength: 5
   CameraSide: 1
-  CameraDistance: 40
+  CameraDistance: 20
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0
@@ -265,8 +265,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8836475688243712412}
-  m_LocalRotation: {x: 0.109116785, y: -0, z: -0, w: 0.994029}
-  m_LocalPosition: {x: 0, y: 10, z: -45}
+  m_LocalRotation: {x: 0.18910757, y: -0, z: -0, w: 0.9819564}
+  m_LocalPosition: {x: 0, y: 10, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 4472454460119001799}
   m_Follow: {fileID: 1089657293359661892}
   m_Lens:
-    FieldOfView: 35
+    FieldOfView: 30
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -303,6 +303,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+    FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
