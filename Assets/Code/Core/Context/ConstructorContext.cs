@@ -61,7 +61,7 @@ public class ConstructorContext : ICoreSystem
         _targetObject = null;
         
         ServicesEvents.Constructor.Drop(Object);
-
+        Behaviour.TryConstruction(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
     }
 
     public void PointIn(GridObject Object)
@@ -87,12 +87,9 @@ public class ConstructorContext : ICoreSystem
 
         Object.MoveTo(position.ToCell());
         ConstructorUtils.PlaceObjectToGrid(Object);
+        // Behaviour.TryObject(Object);
+        Behaviour.TryConstruction(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
         
-        bool isAllowed = Behaviour.TryObject(Object);
-        Object.Data.result = isAllowed ? GridObjectData.Result.Unlock : GridObjectData.Result.Failed;
-
-        Debug.Log($"IsAllowed: {isAllowed}");
-
         _lastPosition = position.ToCell();
     }
     

@@ -82,8 +82,6 @@ public class GridObject : MonoBehaviour
     {
         int cellCount = (int)(_bounds.Size.x * _bounds.Size.z * _bounds.Size.y);
         Cell[] cells = new Cell[cellCount];
-        
-        Vector3 center = transform.position;
 
         for (int x = 0, count = 0; x < _bounds.Size.x; x++)
         {
@@ -154,7 +152,7 @@ public class GridObject : MonoBehaviour
 
     private void DrawLinks(bool isSelected)
     {
-        Vector3 position = transform.position.ToCell() + center;
+        Vector3 position = transform.position + center;
 
         foreach (var link in _links)
         {

@@ -12,17 +12,31 @@ public sealed class ConstructorBehaviour
         };
     }
 
-    public bool TryConstruction()
+    public bool TryConstruction(GridObject[] Objects)
     {
-        return false;
+        bool result = true;
+        
+        foreach (var Object in Objects)
+        {
+            if (!TryObject(Object))
+                result = false;
+        }
+        
+        return result;
     }
 
     public bool TryObject(GridObject Object)
     {
         foreach (var rule in _rules)
-            if(!rule.Execute(Object))
+        {
+            if (!rule.Execute(Object))
+            {
+                Object.Data.result = GridObjectData.Result.Failed;
                 return false;
+            }
+        }
         
+        Object.Data.result = GridObjectData.Result.Unlock;
         return true;
     }
 }

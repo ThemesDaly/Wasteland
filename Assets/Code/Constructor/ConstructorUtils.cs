@@ -53,4 +53,40 @@ public static class ConstructorUtils
         _cells = Object.GetBounds();
         _links = Object.GetLinks();
     }
+
+    public static bool TryConnectionObjects(GridObject first, GridObject second)
+    {
+        foreach (var firstLink in first.GetLinks())
+        {
+            foreach (var secondLink in second.GetLinks())
+            {
+                if (TryLinks(firstLink, secondLink))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static bool TryLinks(GridObjectLink first, GridObjectLink second)
+    {
+        var context = Services.Constructor.Context;
+        
+        foreach (var firstConnector in first.Connectors)
+        {
+            foreach (var secondConnector in second.Connectors)
+            {
+                if (context.Grid[firstConnector.Cell].Equals(context.Grid[secondConnector.Cell]) && 
+                    TryConnectors(firstConnector, secondConnector))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static bool TryConnectors(GridObjectLink.Connector first, GridObjectLink.Connector second)
+    {
+        return (int)first.Place == -(int)second.Place;
+    }
 }
