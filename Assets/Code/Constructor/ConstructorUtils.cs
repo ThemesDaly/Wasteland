@@ -12,7 +12,7 @@ public static class ConstructorUtils
         _links = Object.GetLinks();
     }
 
-    public static void PlaceObjectToGrid(GridObject Object)
+    public static void MoveObjectToGrid(GridObject Object)
     {
         var context = Services.Constructor.Context;
 
@@ -21,10 +21,6 @@ public static class ConstructorUtils
             if (context.Grid[cell] != null)
                 context.Grid[cell].RemoveObject(Object);
         }
-        
-        foreach (var cell in Object.GetBounds())
-            if(context.Grid[cell] != null)
-                context.Grid[cell].AddObject(Object);
 
         foreach (var link in _links)
         {
@@ -35,6 +31,20 @@ public static class ConstructorUtils
             }
         }
 
+        PlaceObjectToGrid(Object);
+
+        _cells = Object.GetBounds();
+        _links = Object.GetLinks();
+    }
+    
+    public static void PlaceObjectToGrid(GridObject Object)
+    {
+        var context = Services.Constructor.Context;
+
+        foreach (var cell in Object.GetBounds())
+            if(context.Grid[cell] != null)
+                context.Grid[cell].AddObject(Object);
+
         foreach (var link in Object.GetLinks())
         {
             foreach (var connector in link.Connectors)
@@ -43,9 +53,6 @@ public static class ConstructorUtils
                     context.Grid[connector.Cell].AddConnector(Object);
             }
         }
-
-        _cells = Object.GetBounds();
-        _links = Object.GetLinks();
     }
 
     public static bool TryConnectionObjects(GridObject first, GridObject second)

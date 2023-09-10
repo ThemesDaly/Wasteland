@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4765963459629936815}
   - component: {fileID: 26897397202924365}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Grid Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _content: {fileID: 8827934684472446676}
+  _collider: {fileID: 3649916564046993442}
   _renderer: {fileID: 5825980613716582751}
 --- !u!1 &4039215170065696386
 GameObject:
@@ -141,7 +142,7 @@ GameObject:
   - component: {fileID: 112459304193561928}
   - component: {fileID: 3649916564046993442}
   m_Layer: 6
-  m_Name: Mesh
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

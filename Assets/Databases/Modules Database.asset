@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2061923530170649860
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a09890e06cb42e287d470b8cd822fb8, type: 3}
+  m_Name: RoomModule
+  m_EditorClassIdentifier: 
+  BaseData:
+    Container: {fileID: 4013771846559884542, guid: 8c0916c595f054c44ac0adba2483b598, type: 3}
+    Id: 1367f3d69f6748ad9baaaf2238ddeb25
+    Name: Room
+    Icon: {fileID: 21300000, guid: 54f6147bc93704f9eb92284bc71b5bbc, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14,6 +31,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Items:
   - {fileID: 6147133766944058378}
+  - {fileID: -2061923530170649860}
 --- !u!114 &6147133766944058378
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -29,5 +47,5 @@ MonoBehaviour:
   BaseData:
     Container: {fileID: 5588784465005595827, guid: 6a21acb9f249f4413a8cde84a92cf37b, type: 3}
     Id: 15f6931f56d34f3f848ce25caa0ffafe
-    Name: PlatformWheel
+    Name: 4WD
     Icon: {fileID: 21300000, guid: 70d0a03ed756940788d5b87074396690, type: 3}

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerConstructor : BaseMonoController
 {
     public Vector3 Position => InputSystem.Pivot.position;
-    
+
     private PlayerInput InputSystem;
     
     private GridObject _target;
@@ -42,6 +42,11 @@ public class PlayerConstructor : BaseMonoController
         }
         
         ServicesEvents.Constructor.CursorCell(InputSystem.InputPosition);
+        
+        if(Input.GetKeyDown(KeyCode.Q))
+            ServicesEvents.Constructor.FloorDown();
+        else if(Input.GetKeyDown(KeyCode.E))
+            ServicesEvents.Constructor.FloorUp();
     }
 
     private void Selected(GridObject Object)
@@ -55,4 +60,6 @@ public class PlayerConstructor : BaseMonoController
     }
     
     public void SetCenter(Vector3 position) => InputSystem.Pivot.position = position;
+
+    public void SetFloor(int height) => InputSystem.Pivot.position = InputSystem.Pivot.position.WithY(height);
 }

@@ -18,12 +18,12 @@ public class ConstructorContext : ICoreSystem
     private static readonly Dictionary<Type, BaseMonoController> _controllers = new Dictionary<Type, BaseMonoController>();
 
     private GridObject _targetObject;
-    
-    // private ModuleContainer
 
     private Vector3 _offsetPosition;
     
     private Vector3 _updatePosition;
+
+    private int _floorHeight;
 
     public void Init()
     {
@@ -33,6 +33,9 @@ public class ConstructorContext : ICoreSystem
         GridPlane = ContextUtils.SpawnManager<GridPlane>(_controllers, Configs.Get<GameConfig>().gridPlane);
 
         Behaviour = new ConstructorBehaviour(this);
+
+        ServicesEvents.Constructor.OnFloorUp += FloorUp;
+        ServicesEvents.Constructor.OnFloorDown += FloorDown;
     }
 
     public void DeInit()
@@ -51,6 +54,8 @@ public class ConstructorContext : ICoreSystem
         var moduleContainer = Configs.Get<GameConfig>().Modules.GetById(inventoryId).BaseData.Container;
         var prefabContainer = Object.Instantiate(moduleContainer);
         prefabContainer.transform.position = PlayerGame.Position;
+        ConstructorUtils.PlaceObjectToGrid(prefabContainer.Object);
+        Behaviour.TryObject(prefabContainer.Object);
         prefabContainer.Init();
     }
     
@@ -94,6 +99,24 @@ public class ConstructorContext : ICoreSystem
         ServicesEvents.Constructor.PointOut(Object);
     }
 
+    private void FloorUp()
+    {
+        if(_floorHeight + 1 <= Grid.GRID_SIZE_Y)
+        {
+            GridPlane.SetFloor(++_floorHeight);
+            PlayerGame.SetFloor(_floorHeight);
+        }
+    }
+
+    private void FloorDown()
+    {
+        if(_floorHeight - 1 >= 0)
+        {
+            GridPlane.SetFloor(--_floorHeight);
+            PlayerGame.SetFloor(_floorHeight);
+        }
+    }
+
     public void MoveObject(GridObject Object, Vector3 position)
     {
         if (_offsetPosition.Equals(-Vector3.one))
@@ -103,7 +126,7 @@ public class ConstructorContext : ICoreSystem
             return;
 
         Object.MoveTo((position + _offsetPosition).ToCell());
-        ConstructorUtils.PlaceObjectToGrid(Object);
+        ConstructorUtils.MoveObjectToGrid(Object);
         Behaviour.TryConstruction(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
         
         _updatePosition = position.ToCell();

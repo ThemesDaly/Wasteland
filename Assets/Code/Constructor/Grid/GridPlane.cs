@@ -3,6 +3,7 @@ using UnityEngine;
 public class GridPlane : BaseMonoController
 {
     [SerializeField] private Transform _content;
+    [SerializeField] private Collider _collider;
     [SerializeField] private MeshRenderer _renderer;
     
     public override void Init()
@@ -22,4 +23,6 @@ public class GridPlane : BaseMonoController
     {
         
     }
+
+    public void SetFloor(int height) => _collider.transform.localPosition = _collider.transform.localPosition.WithY(height);
 }

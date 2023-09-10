@@ -10,6 +10,8 @@ public static class ServicesEvents
         public static event Action<GridObject> OnDrop;
         public static event Action<GridObject> OnPointIn;
         public static event Action<GridObject> OnPointOut;
+        public static event Action OnFloorUp;
+        public static event Action OnFloorDown;
 
         public static void CursorCell(Vector3 worldPosition)
         {
@@ -34,6 +36,16 @@ public static class ServicesEvents
         public static void PointOut(GridObject Object)
         {
             OnPointOut?.Invoke(Object);
+        }
+
+        public static void FloorUp()
+        {
+            OnFloorUp?.Invoke();
+        }
+        
+        public static void FloorDown()
+        {
+            OnFloorDown?.Invoke();
         }
     }
     
