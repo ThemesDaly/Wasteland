@@ -3,39 +3,21 @@ using UnityEngine;
 
 public class PlayerConstructor : BaseMonoController
 {
-    private PlayerInput InputSystem; 
+    private PlayerInput InputSystem;
     
-    private Transform _pivot;
-    private Transform _point;
-    private Transform _forward;
-
     private GridObject _target;
-    
-    private Vector3 _rayPoint;
 
     public override void Init()
     {
-        _pivot = new GameObject("Pivot").transform;
-        _pivot.SetParent(transform);
-        
-        _point = new GameObject("Point").transform;
-        _point.SetParent(_pivot);
-        
-        _forward = new GameObject("Forward").transform;
-        _forward.SetParent(transform);
-        
         InputSystem = new PlayerInput(Configs.Get<InputSettings>().Constructor, 
                                       Services.Constructor.Context.PlayerCamera,
                                       Configs.Get<GameConfig>().LayerGrid,
-                                      _pivot,
-                                      _point, 
-                                      _forward);
+                                      transform);
 
-        Services.Constructor.Context.PlayerCamera.SetFollow(_point);
+        Services.Constructor.Context.PlayerCamera.SetFollow(InputSystem.Point);
 
-        _pivot.position = new Vector3(Grid.GRID_SIZE_X, 0, Grid.GRID_SIZE_Z) / 2F;
+        InputSystem.Pivot.position = new Vector3(Grid.GRID_SIZE_X, 0, Grid.GRID_SIZE_Z) / 2F;
         
-        InputSystem.OnUpdate += Enter;
         ServicesEvents.Constructor.OnDrag += Selected;
         ServicesEvents.Constructor.OnDrop += Drop;
     }
@@ -52,9 +34,14 @@ public class PlayerConstructor : BaseMonoController
         if (_target)
         {
             if(Input.GetMouseButtonUp(0))
+            {
                 Services.Constructor.Context.Drop(_target);
+            }
             else
-                Services.Constructor.Context.MoveObject(_target, _rayPoint);
+            {
+                Services.Constructor.Context.MoveObject(_target, InputSystem.InputPosition);
+                ServicesEvents.Constructor.CursorCell(InputSystem.InputPosition);
+            }
         }
     }
 
@@ -67,12 +54,6 @@ public class PlayerConstructor : BaseMonoController
     {
         _target = null;
     }
-
-    private void Enter(Vector3 position)
-    {
-        _rayPoint = position;
-        ServicesEvents.Constructor.CursorCell(position);
-    }
-
-    public void SetCenter(Vector3 position) => _pivot.position = position;
+    
+    public void SetCenter(Vector3 position) => InputSystem.Pivot.position = position;
 }

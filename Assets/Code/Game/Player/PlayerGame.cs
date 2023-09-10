@@ -2,31 +2,16 @@ using UnityEngine;
 
 public class PlayerGame : BaseMonoController
 {
-    private PlayerInput InputSystem; 
-    
-    private Transform _pivot;
-    private Transform _point;
-    private Transform _forward;
+    private PlayerInput InputSystem;
 
     public override void Init()
     {
-        _pivot = new GameObject("Pivot").transform;
-        _pivot.SetParent(transform);
-        
-        _point = new GameObject("Point").transform;
-        _point.SetParent(_pivot);
-        
-        _forward = new GameObject("Forward").transform;
-        _forward.SetParent(transform);
-        
         InputSystem = new PlayerInput(Configs.Get<InputSettings>().Game, 
                                       Services.Game.Context.PlayerCamera, 
                                       Configs.Get<GameConfig>().LayerGround,
-                                      _pivot,
-                                      _point, 
-                                      _forward);
+                                      transform);
 
-        Services.Game.Context.PlayerCamera.SetFollow(_point);
+        Services.Game.Context.PlayerCamera.SetFollow(InputSystem.Point);
     }
 
     public override void DeInit()

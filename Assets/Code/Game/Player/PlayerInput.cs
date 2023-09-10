@@ -5,6 +5,10 @@ public class PlayerInput
 {
     public Action<Vector3> OnUpdate;
     public Action<Vector3> OnClick;
+
+    public Transform Pivot => _pivot;
+    public Transform Point => _point;
+    public Vector3 InputPosition => _inputPosition;
     
     private Transform _pivot;
     private Transform _point;
@@ -21,18 +25,26 @@ public class PlayerInput
     private Ray _ray;
     private RaycastHit _hit;
     private LayerMask _layerHit;
+
+    private Vector3 _inputPosition;
     
     private InputSettings.InputData _settings;
     private PlayerCamera _camera;
     
-    public PlayerInput(InputSettings.InputData settings, PlayerCamera camera, LayerMask layerHit, Transform pivot, Transform point, Transform forward)
+    public PlayerInput(InputSettings.InputData settings, PlayerCamera camera, LayerMask layerHit, Transform root)
     {
         _settings = settings;
         _camera = camera;
         _layerHit = layerHit;
-        _pivot = pivot;
-        _point = point;
-        _forward = forward;
+
+        _pivot = new GameObject("Pivot").transform;
+        _pivot.SetParent(root);
+        
+        _point = new GameObject("Point").transform;
+        _point.SetParent(_pivot);
+        
+        _forward = new GameObject("Forward").transform;
+        _forward.SetParent(root);
     }
 
     public void Execute()
@@ -88,6 +100,8 @@ public class PlayerInput
             OnClick?.Invoke(_hit.point);
         else
             OnUpdate?.Invoke(_hit.point);
+
+        _inputPosition = _hit.point;
     }
 
     private void SetCurcor(CursorMode mode)
