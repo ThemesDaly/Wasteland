@@ -18,7 +18,9 @@ public class ConstructorContext : ICoreSystem
 
     private GridObject _targetObject;
 
-    private Vector3 _lastPosition;
+    private Vector3 _offsetPosition;
+    
+    private Vector3 _updatePosition;
 
     public void Init()
     {
@@ -47,7 +49,8 @@ public class ConstructorContext : ICoreSystem
             return;
         
         _targetObject = Object;
-        _lastPosition = -Vector3.one;
+        _updatePosition = -Vector3.one;
+        _offsetPosition = -Vector3.one;
 
         ServicesEvents.Constructor.Drag(Object);
         ConstructorUtils.StartMoveObjectToGrid(Object);
@@ -82,15 +85,17 @@ public class ConstructorContext : ICoreSystem
 
     public void MoveObject(GridObject Object, Vector3 position)
     {
-        if(position.ToCell() == _lastPosition)
+        if (_offsetPosition.Equals(-Vector3.one))
+            _offsetPosition = Object.transform.position - position;
+        
+        if(position.ToCell() == _updatePosition)
             return;
 
-        Object.MoveTo(position.ToCell());
+        Object.MoveTo((position + _offsetPosition).ToCell());
         ConstructorUtils.PlaceObjectToGrid(Object);
-        // Behaviour.TryObject(Object);
         Behaviour.TryConstruction(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
         
-        _lastPosition = position.ToCell();
+        _updatePosition = position.ToCell();
     }
     
     public void SpawnPlayer()
