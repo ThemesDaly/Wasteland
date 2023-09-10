@@ -5,19 +5,28 @@ public class GridCell
 {
     public readonly Cell Cell;
 
+    public List<GridObject> Objects { get; private set; }
+    
+    public List<GridObject> LinkObjects { get; private set; }
+
     public GridCell(int x, int y, int z)
     {
         Cell = Cell.Create(x, y, z);
         Objects = new List<GridObject>();
+        LinkObjects = new List<GridObject>();
     }
 
-    private List<GridObject> Objects;
-    
     public bool IsEmpty => Objects.Count == 0;
 
-    public void Add(GridObject Object) => Objects.Add(Object);
-    
-    public void Remove(GridObject Object) => Objects.Remove(Object);
+    public void AddObject(GridObject Object) => Objects.Add(Object);
 
-    public bool Contains(GridObject Object) => Objects.Contains(Object);
+    public void RemoveObject(GridObject Object) => Objects.Remove(Object);
+
+    public bool ContainsObject(GridObject Object) => Objects.Contains(Object);
+
+    public void AddConnector(GridObject Object) => LinkObjects.Add(Object);
+    
+    public void RemoveConnector(GridObject Object) => LinkObjects.Remove(Object);
+    
+    public bool ContainsConnector(GridObject Object) => LinkObjects.Contains(Object);
 }

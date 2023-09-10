@@ -10,6 +10,7 @@ public class GridObject : MonoBehaviour
     [SerializeField] private GridObjectData _data;
     [SerializeField] private GridObjectView _view;
     [SerializeField] private GridObjectBounds _bounds;
+    [SerializeField] private GridObjectLink[] _links;
 
     public GridObjectData Data => _data;
 
@@ -100,16 +101,26 @@ public class GridObject : MonoBehaviour
         return cells;
     }
 
+    public GridObjectLink[] GetLinks()
+    {
+        foreach (var link in _links)
+            link.RefreshPosition(transform.position + center);
+
+        return _links;
+    }
+
 #if UNITY_EDITOR
 
     private void OnDrawGizmos()
     {
+        DrawLinks(false);
         DrawBound(Color.black, false);
     }
 
     private void OnDrawGizmosSelected()
     {
         var color = new Color(1F, 1F, 0F, 0.5F); 
+        DrawLinks(true);
         DrawCells(color / 2f);
         DrawBound(color, true);
     }
@@ -132,13 +143,31 @@ public class GridObject : MonoBehaviour
     }
 
     private void DrawCells(Color color)
-    { ;
+    {
         Gizmos.color = color;
 
         var cells = GetBounds();
 
         foreach (var cell in cells)
             Gizmos.DrawCube(cell.Position, Vector3.one * 0.95F);
+    }
+
+    private void DrawLinks(bool isSelected)
+    {
+        Vector3 position = transform.position.ToCell() + center;
+
+        foreach (var link in _links)
+        {
+            foreach (var connector in link.Connectors)
+            {
+                Gizmos.color = connector.Place == GridObjectLink.Connector.ConnectorPlace.Inside ? Color.cyan : Color.cyan / 2;
+
+                if(isSelected)
+                    Gizmos.DrawCube(position + connector.Position.ToCell(), Vector3.one);
+                else
+                    Gizmos.DrawWireCube(position + connector.Position.ToCell(), Vector3.one);   
+            }
+        }
     }
 
 #endif

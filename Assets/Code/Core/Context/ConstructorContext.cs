@@ -18,7 +18,7 @@ public class ConstructorContext : ICoreSystem
 
     private GridObject _targetObject;
 
-    private Cell[] _cells;
+    private Vector3 _lastPosition;
 
     public void Init()
     {
@@ -47,28 +47,21 @@ public class ConstructorContext : ICoreSystem
             return;
         
         _targetObject = Object;
-        _cells = Object.GetBounds();
-        
+        _lastPosition = -Vector3.one;
+
         ServicesEvents.Constructor.Drag(Object);
+        ConstructorUtils.StartMoveObjectToGrid(Object);
     }
 
     public void Drop(GridObject Object)
     {
         if(_targetObject == null)
             return;
-
-        foreach (var cell in _cells)
-            if(Grid[cell] != null)
-                Grid[cell].Remove(Object);
-        
-        foreach (var cell in Object.GetBounds())
-            if(Grid[cell] != null)
-                Grid[cell].Add(Object);
         
         _targetObject = null;
-        _cells = null;
         
         ServicesEvents.Constructor.Drop(Object);
+
     }
 
     public void PointIn(GridObject Object)
@@ -89,15 +82,18 @@ public class ConstructorContext : ICoreSystem
 
     public void MoveObject(GridObject Object, Vector3 position)
     {
-        if(position == Vector3.zero)
+        if(position.ToCell() == _lastPosition)
             return;
-        
-        bool isAllowed = Behaviour.TryObject(Object);
 
         Object.MoveTo(position.ToCell());
-        Object.Data.result = isAllowed ? GridObjectData.Result.Unlock : GridObjectData.Result.Failed;
+        ConstructorUtils.PlaceObjectToGrid(Object);
         
+        bool isAllowed = Behaviour.TryObject(Object);
+        Object.Data.result = isAllowed ? GridObjectData.Result.Unlock : GridObjectData.Result.Failed;
+
         Debug.Log($"IsAllowed: {isAllowed}");
+
+        _lastPosition = position.ToCell();
     }
     
     public void SpawnPlayer()

@@ -34,15 +34,12 @@ public class PlayerConstructor : BaseMonoController
         if (_target)
         {
             if(Input.GetMouseButtonUp(0))
-            {
                 Services.Constructor.Context.Drop(_target);
-            }
             else
-            {
                 Services.Constructor.Context.MoveObject(_target, InputSystem.InputPosition);
-                ServicesEvents.Constructor.CursorCell(InputSystem.InputPosition);
-            }
         }
+        
+        ServicesEvents.Constructor.CursorCell(InputSystem.InputPosition);
     }
 
     private void Selected(GridObject Object)

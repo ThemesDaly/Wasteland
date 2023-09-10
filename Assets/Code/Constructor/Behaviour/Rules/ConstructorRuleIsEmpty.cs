@@ -6,11 +6,9 @@ public class ConstructorRuleIsEmpty : ConstructorRule
     {
         foreach (var cell in Object.GetBounds())
         {
-            if(_context.Grid[cell].Contains(Object))
-                continue;
-            
-            if (!_context.Grid[cell].IsEmpty)
-                return false;
+            foreach (var other in _context.Grid[cell].Objects)
+                if (!other.Equals(Object))
+                    return false;
         }
 
         return true;
