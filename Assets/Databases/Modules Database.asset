@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7726636891587895905
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d261979d6e0f4190a705c990ce9d9ad6, type: 3}
+  m_Name: CockpitModule
+  m_EditorClassIdentifier: 
+  BaseData:
+    View: {fileID: 0}
+    Id: cfec54884d70414c98d543cdba022750
+    Name: Base crocks
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14,6 +30,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Items:
   - {fileID: 7608203752549194041}
+  - {fileID: -7726636891587895905}
+  - {fileID: 177140677818639756}
+--- !u!114 &177140677818639756
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d261979d6e0f4190a705c990ce9d9ad6, type: 3}
+  m_Name: CockpitModule
+  m_EditorClassIdentifier: 
+  BaseData:
+    View: {fileID: 0}
+    Id: 50952219994a42b0b1bf6650204e9798
+    Name: Tramp jobs
 --- !u!114 &7608203752549194041
 MonoBehaviour:
   m_ObjectHideFlags: 3
