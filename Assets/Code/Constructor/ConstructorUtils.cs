@@ -31,10 +31,7 @@ public static class ConstructorUtils
             foreach (var connector in link.Connectors)
             {
                 if(context.Grid[connector.Cell] != null)
-                {
                     context.Grid[connector.Cell].RemoveConnector(Object);
-                    // Debug.Log($"Remove last connector cell {context.Grid[connector.Cell].Cell.Position}");
-                }
             }
         }
 
@@ -43,10 +40,7 @@ public static class ConstructorUtils
             foreach (var connector in link.Connectors)
             {
                 if(context.Grid[connector.Cell] != null)
-                {
                     context.Grid[connector.Cell].AddConnector(Object);
-                    // Debug.Log($"Add connector cell {context.Grid[connector.Cell].Cell.Position}");
-                }
             }
         }
 

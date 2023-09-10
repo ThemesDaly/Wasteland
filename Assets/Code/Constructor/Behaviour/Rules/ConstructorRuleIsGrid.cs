@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class ConstructorRuleIsGrid : ConstructorRule
 {
     public ConstructorRuleIsGrid(ConstructorContext context) : base(context) { }

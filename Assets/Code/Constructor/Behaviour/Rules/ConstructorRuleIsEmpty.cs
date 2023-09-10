@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class ConstructorRuleIsEmpty : ConstructorRule
 {
     public ConstructorRuleIsEmpty(ConstructorContext context) : base(context) { }

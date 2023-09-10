@@ -19,8 +19,9 @@ public class ConstructorRuleIsLink : ConstructorRule
                 {
                     var firstObject = _context.Grid[connector.Cell].LinkObjects[0];
                     var secondObject = _context.Grid[connector.Cell].LinkObjects[1];
-                    
-                    return ConstructorUtils.TryConnectionObjects(firstObject, secondObject);
+
+                    if (ConstructorUtils.TryConnectionObjects(firstObject, secondObject))
+                        return true;
                 }
                 
             }

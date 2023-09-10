@@ -152,8 +152,6 @@ public class GridObject : MonoBehaviour
 
     private void DrawLinks(bool isSelected)
     {
-        Vector3 position = transform.position + center;
-
         foreach (var link in _links)
         {
             foreach (var connector in link.Connectors)
@@ -161,9 +159,9 @@ public class GridObject : MonoBehaviour
                 Gizmos.color = connector.Place == GridObjectLink.Connector.ConnectorPlace.Inside ? Color.cyan : Color.cyan / 2;
 
                 if(isSelected)
-                    Gizmos.DrawCube(position + connector.Position.ToCell(), Vector3.one);
+                    Gizmos.DrawCube(transform.position + connector.Position, Vector3.one);
                 else
-                    Gizmos.DrawWireCube(position + connector.Position.ToCell(), Vector3.one);   
+                    Gizmos.DrawWireCube(transform.position + connector.Position, Vector3.one);   
             }
         }
     }
