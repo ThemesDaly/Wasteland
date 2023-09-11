@@ -6,6 +6,7 @@ public class ModuleContainer : MonoBehaviour
     [SerializeField] private Transform _view;
 
     public GridObject Object => _object;
+    public Transform View => _view;
 
     public void Init()
     {

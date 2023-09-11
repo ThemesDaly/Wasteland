@@ -6,13 +6,13 @@ public static class ConstructorUtils
     
     private static GridObjectLink[] _links;
 
-    public static void StartMoveObjectToGrid(GridObject Object)
+    public static void StartMoveObject(GridObject Object)
     {
         _cells = Object.GetBounds();
         _links = Object.GetLinks();
     }
 
-    public static void MoveObjectToGrid(GridObject Object)
+    public static void MoveObject(GridObject Object)
     {
         var context = Services.Constructor.Context;
 
@@ -31,13 +31,13 @@ public static class ConstructorUtils
             }
         }
 
-        PlaceObjectToGrid(Object);
+        PlaceObject(Object);
 
         _cells = Object.GetBounds();
         _links = Object.GetLinks();
     }
     
-    public static void PlaceObjectToGrid(GridObject Object)
+    public static void PlaceObject(GridObject Object)
     {
         var context = Services.Constructor.Context;
 
@@ -55,7 +55,7 @@ public static class ConstructorUtils
         }
     }
 
-    public static bool TryConnectionObjects(GridObject first, GridObject second)
+    public static bool TryConnection(GridObject first, GridObject second)
     {
         foreach (var firstLink in first.GetLinks())
         {

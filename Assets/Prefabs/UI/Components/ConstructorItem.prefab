@@ -31,7 +31,6 @@ RectTransform:
   - {fileID: 7402850183802187791}
   - {fileID: 2278856008167539749}
   m_Father: {fileID: 7115273099121779280}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -70,7 +69,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7115273099121779280}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -169,7 +167,6 @@ RectTransform:
   - {fileID: 6458184030558949422}
   - {fileID: 6268828839925970163}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -266,7 +263,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7115273099121779280}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -303,8 +299,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Race booster magned
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0a476d4e0e6a74491a0149c15d5e987c, type: 2}
-  m_sharedMaterial: {fileID: -5232538342896554173, guid: 0a476d4e0e6a74491a0149c15d5e987c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 276e148d3e2a24ab390791c531dd1dc8, type: 2}
+  m_sharedMaterial: {fileID: -3448222033676298126, guid: 276e148d3e2a24ab390791c531dd1dc8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -401,7 +397,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6458184030558949422}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -477,7 +472,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6458184030558949422}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

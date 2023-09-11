@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerConstructor : BaseMonoController
 {
-    public Vector3 Position => InputSystem.Pivot.position;
+    public Vector3 Position => InputSystem.Point.position;
 
     private PlayerInput InputSystem;
     

@@ -12,7 +12,7 @@ public sealed class ConstructorBehaviour
         };
     }
 
-    public bool TryConstruction(GridObject[] Objects)
+    public bool TryObjects(GridObject[] Objects)
     {
         bool result = true;
         

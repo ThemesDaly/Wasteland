@@ -53,10 +53,12 @@ public class ConstructorContext : ICoreSystem
     {
         var moduleContainer = Configs.Get<GameConfig>().Modules.GetById(inventoryId).BaseData.Container;
         var prefabContainer = Object.Instantiate(moduleContainer);
-        prefabContainer.transform.position = PlayerGame.Position;
-        ConstructorUtils.PlaceObjectToGrid(prefabContainer.Object);
-        Behaviour.TryObject(prefabContainer.Object);
+        var objectContainer = prefabContainer.Object;
         prefabContainer.Init();
+        
+        objectContainer.MoveTo(PlayerGame.Position.ToCell());
+        ConstructorUtils.PlaceObject(objectContainer);
+        Behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
     }
     
     public void Drag(GridObject Object)
@@ -69,7 +71,7 @@ public class ConstructorContext : ICoreSystem
         _offsetPosition = -Vector3.one;
 
         ServicesEvents.Constructor.Drag(Object);
-        ConstructorUtils.StartMoveObjectToGrid(Object);
+        ConstructorUtils.StartMoveObject(Object);
     }
 
     public void Drop(GridObject Object)
@@ -80,7 +82,7 @@ public class ConstructorContext : ICoreSystem
         _targetObject = null;
         
         ServicesEvents.Constructor.Drop(Object);
-        Behaviour.TryConstruction(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
+        Behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
     }
 
     public void PointIn(GridObject Object)
@@ -126,8 +128,8 @@ public class ConstructorContext : ICoreSystem
             return;
 
         Object.MoveTo((position + _offsetPosition).ToCell());
-        ConstructorUtils.MoveObjectToGrid(Object);
-        Behaviour.TryConstruction(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
+        ConstructorUtils.MoveObject(Object);
+        Behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
         
         _updatePosition = position.ToCell();
     }
