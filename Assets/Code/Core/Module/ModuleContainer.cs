@@ -8,7 +8,7 @@ public class ModuleContainer : MonoBehaviour
     public GridObject Object => _object;
     public Transform View => _view;
 
-    public void Init()
+    public void Unpack()
     {
         _object.transform.SetParent(null);
         _object.Init(_view);

@@ -42,6 +42,9 @@ public sealed class ConstructorManager
 
     private void PointSystem()
     {
+        if(_grabObject)
+            return;
+        
         if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, _objectLayer))
         {
             if(_targetObject == null)

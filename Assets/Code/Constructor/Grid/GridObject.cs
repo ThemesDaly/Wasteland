@@ -20,7 +20,7 @@ public class GridObject : MonoBehaviour
 
     private BoxCollider _collider;
 
-    public void Init(Transform target)
+    public void Init(Transform view)
     {
         _collider = gameObject.AddComponent<BoxCollider>();
 
@@ -32,10 +32,10 @@ public class GridObject : MonoBehaviour
         _collider.center = center;
         _collider.size = _bounds.Size;
         
-        _data.SetTarget(target);
-        _view.Init(target);
+        _data.SetTarget(view);
+        _view.Init(view);
         
-        target.position = transform.position;
+        view.position = transform.position;
 
         ServicesEvents.Constructor.OnPointIn += PointIn;
         ServicesEvents.Constructor.OnPointOut += PointOut;
