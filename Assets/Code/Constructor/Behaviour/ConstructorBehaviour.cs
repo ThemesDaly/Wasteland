@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public sealed class ConstructorBehaviour
 {
     private ConstructorRule[] _rules;
@@ -12,7 +14,7 @@ public sealed class ConstructorBehaviour
         };
     }
 
-    public bool TryObjects(GridObject[] Objects)
+    public bool TryObjects(List<GridObject> Objects)
     {
         bool result = true;
         

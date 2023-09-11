@@ -12,7 +12,7 @@ public static class ConstructorUtils
         _links = Object.GetLinks();
     }
 
-    public static void MoveObject(GridObject Object)
+    public static void ReplaceObject(GridObject Object)
     {
         var context = Services.Constructor.Context;
 
@@ -51,6 +51,26 @@ public static class ConstructorUtils
             {
                 if(context.Grid[connector.Cell] != null)
                     context.Grid[connector.Cell].AddConnector(Object);
+            }
+        }
+    }
+
+    public static void ClearObject(GridObject Object)
+    {
+        var context = Services.Constructor.Context;
+
+        foreach (var cell in Object.GetBounds())
+        {
+            if (context.Grid[cell] != null)
+                context.Grid[cell].RemoveObject(Object);
+        }
+
+        foreach (var link in Object.GetLinks())
+        {
+            foreach (var connector in link.Connectors)
+            {
+                if(context.Grid[connector.Cell] != null)
+                    context.Grid[connector.Cell].RemoveConnector(Object);
             }
         }
     }

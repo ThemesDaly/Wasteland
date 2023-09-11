@@ -50,7 +50,7 @@ public sealed class ConstructorTools
         _targetObject = null;
         
         ServicesEvents.Constructor.Drop(Object);
-        _behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
+        _behaviour.TryObjects(_context.Objects);
     }
     
     public void MoveObject(GridObject Object, Vector3 position)
@@ -61,9 +61,9 @@ public sealed class ConstructorTools
         if(position.ToCell() == _updatePosition)
             return;
 
-        Object.MoveTo((position + _offsetPosition).ToCell());
-        ConstructorUtils.MoveObject(Object);
-        _behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
+        Object.MoveTo(position + _offsetPosition);
+        ConstructorUtils.ReplaceObject(Object);
+        _behaviour.TryObjects(_context.Objects);
         
         _updatePosition = position.ToCell();
     }

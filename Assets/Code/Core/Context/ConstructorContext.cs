@@ -21,6 +21,8 @@ public class ConstructorContext : ICoreSystem
     
     private static readonly Dictionary<Type, BaseMonoController> _controllers = new Dictionary<Type, BaseMonoController>();
 
+    public List<GridObject> Objects { get; private set; }
+
     private bool _isInit;
 
     public void Init()
@@ -33,6 +35,7 @@ public class ConstructorContext : ICoreSystem
         Behaviour = new ConstructorBehaviour(this);
         Tools = new ConstructorTools(this, Behaviour);
         Manager = new ConstructorManager(this, Tools);
+        Objects = new List<GridObject>();
 
         _isInit = true;
     }
@@ -67,12 +70,16 @@ public class ConstructorContext : ICoreSystem
         
         objectContainer.MoveTo(PlayerGame.Position.ToCell());
         ConstructorUtils.PlaceObject(objectContainer);
-        Behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
+        
+        Objects.Add(objectContainer);
+        Behaviour.TryObjects(Objects);
     }
 
     public void RemoveModule(GridObject Object)
     {
-        
+        ConstructorUtils.ClearObject(Object);
+        GameObject.Destroy(Object.Data.Target.gameObject);
+        GameObject.Destroy(Object.gameObject);
     }
 
     public void SpawnPlayer()

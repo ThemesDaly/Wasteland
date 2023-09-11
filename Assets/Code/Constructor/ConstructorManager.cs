@@ -56,6 +56,7 @@ public sealed class ConstructorManager
             {
                 PointOut(_targetObject);
                 _targetObject = _hit.transform.GetComponent<GridObject>();
+                PointIn(_targetObject);
             }
 
             ServicesEvents.Constructor.CursorCell(_hit.point);
@@ -79,21 +80,27 @@ public sealed class ConstructorManager
             _tools.Drop(_grabObject);
             _grabObject = null;
         }
-        else if(_grabObject)
+        else if(_grabObject && Physics.Raycast(_ray, out _hit, Mathf.Infinity, _gridLayer))
         {
-            if (Physics.Raycast(_ray, out _hit, Mathf.Infinity, _gridLayer))
-            {
-                _tools.MoveObject(_grabObject, _hit.point);
-            }
+            _tools.MoveObject(_grabObject, _hit.point);
         }
     }
 
     private void HotkeySystem()
     {
         if(Input.GetKeyDown(KeyCode.Q))
+        {
             ServicesEvents.Constructor.FloorDown();
+        }
         else if(Input.GetKeyDown(KeyCode.E))
+        {
             ServicesEvents.Constructor.FloorUp();
+        }
+        else if(Input.GetKeyDown(KeyCode.R))
+        {
+            if(_grabObject)
+                _context.RemoveModule(_grabObject);
+        }
     }
     
     private void PointIn(GridObject Object)

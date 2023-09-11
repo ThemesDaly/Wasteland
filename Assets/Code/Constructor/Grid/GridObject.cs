@@ -43,9 +43,6 @@ public class GridObject : MonoBehaviour
 
     private void Update()
     {
-        if (_data.Target == null)
-            return;
-        
         _data.Target.position = Vector3.Lerp(_data.Target.position, transform.position, RATE_LERP_MOVE * Time.unscaledDeltaTime);
         _view.SetResult(_data.result);
     }
@@ -68,7 +65,7 @@ public class GridObject : MonoBehaviour
 
     public void MoveTo(Vector3 position)
     {
-        transform.position = position;
+        transform.position = position.ToCell();
     }
 
     public Cell[] GetBounds()
