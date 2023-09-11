@@ -10,19 +10,22 @@ public class GameContext : ICoreSystem
 
     private static readonly Dictionary<Type, BaseMonoController> _controllers = new Dictionary<Type, BaseMonoController>();
 
+    private bool _isInit;
+
     public void Init()
     {
-        
+        _isInit = true;
     }
 
     public void DeInit()
     {
-        
+        _isInit = false;
     }
 
     public void Execute()
     {
-        
+        if(!_isInit)
+            return;
     }
 
     public void SpawnPlayer()

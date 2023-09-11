@@ -7,8 +7,7 @@ public class PlayerGame : BaseMonoController
     public override void Init()
     {
         InputSystem = new PlayerInput(Configs.Get<InputSettings>().Game, 
-                                      Services.Game.Context.PlayerCamera, 
-                                      Configs.Get<GameConfig>().LayerGround,
+                                      Services.Game.Context.PlayerCamera,
                                       transform);
 
         Services.Game.Context.PlayerCamera.SetFollow(InputSystem.Point);

@@ -14,16 +14,20 @@ public class ConstructorContext : ICoreSystem
     public Grid Grid { get; private set; }
 
     private ConstructorBehaviour Behaviour;
+
+    private ConstructorManager Manager; 
+
+    private ConstructorTools Tools;
     
     private static readonly Dictionary<Type, BaseMonoController> _controllers = new Dictionary<Type, BaseMonoController>();
 
-    private GridObject _targetObject;
+    // private GridObject _targetObject;
+    //
+    // private Vector3 _offsetPosition;
+    //
+    // private Vector3 _updatePosition;
 
-    private Vector3 _offsetPosition;
-    
-    private Vector3 _updatePosition;
-
-    private int _floorHeight;
+    private bool _isInit;
 
     public void Init()
     {
@@ -33,20 +37,30 @@ public class ConstructorContext : ICoreSystem
         GridPlane = ContextUtils.SpawnManager<GridPlane>(_controllers, Configs.Get<GameConfig>().gridPlane);
 
         Behaviour = new ConstructorBehaviour(this);
+        Tools = new ConstructorTools(this, Behaviour);
+        Manager = new ConstructorManager(this, Tools);
 
-        ServicesEvents.Constructor.OnFloorUp += FloorUp;
-        ServicesEvents.Constructor.OnFloorDown += FloorDown;
+        _isInit = true;
     }
 
     public void DeInit()
     {
-        
+        Behaviour = null;
+        Manager = null;
+        Tools = null;
+
+        _isInit = false;
     }
 
     public void Execute()
     {
+        if(!_isInit)
+            return;
+        
         foreach (var controller in _controllers)
             controller.Value.Execute();
+
+        Manager.Execute();
     }
 
     public void AddModule(string inventoryId)
@@ -60,79 +74,66 @@ public class ConstructorContext : ICoreSystem
         ConstructorUtils.PlaceObject(objectContainer);
         Behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
     }
-    
-    public void Drag(GridObject Object)
-    {
-        if(_targetObject != null)
-            return;
-        
-        _targetObject = Object;
-        _updatePosition = -Vector3.one;
-        _offsetPosition = -Vector3.one;
 
-        ServicesEvents.Constructor.Drag(Object);
-        ConstructorUtils.StartMoveObject(Object);
-    }
-
-    public void Drop(GridObject Object)
+    public void RemoveModule(GridObject Object)
     {
-        if(_targetObject == null)
-            return;
         
-        _targetObject = null;
-        
-        ServicesEvents.Constructor.Drop(Object);
-        Behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
-    }
-
-    public void PointIn(GridObject Object)
-    {
-        if(_targetObject != null)
-            return;
-        
-        ServicesEvents.Constructor.PointIn(Object);
     }
     
-    public void PointOut(GridObject Object)
-    {
-        if(_targetObject != null)
-            return;
-        
-        ServicesEvents.Constructor.PointOut(Object);
-    }
+    // public void Drag(GridObject Object)
+    // {
+    //     if(_targetObject != null)
+    //         return;
+    //     
+    //     _targetObject = Object;
+    //     _updatePosition = -Vector3.one;
+    //     _offsetPosition = -Vector3.one;
+    //
+    //     ServicesEvents.Constructor.Drag(Object);
+    //     ConstructorUtils.StartMoveObject(Object);
+    // }
+    //
+    // public void Drop(GridObject Object)
+    // {
+    //     if(_targetObject == null)
+    //         return;
+    //     
+    //     _targetObject = null;
+    //     
+    //     ServicesEvents.Constructor.Drop(Object);
+    //     Behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
+    // }
 
-    private void FloorUp()
-    {
-        if(_floorHeight + 1 <= Grid.GRID_SIZE_Y)
-        {
-            GridPlane.SetFloor(++_floorHeight);
-            PlayerGame.SetFloor(_floorHeight);
-        }
-    }
+    // public void PointIn(GridObject Object)
+    // {
+    //     if(_targetObject != null)
+    //         return;
+    //     
+    //     ServicesEvents.Constructor.PointIn(Object);
+    // }
+    //
+    // public void PointOut(GridObject Object)
+    // {
+    //     if(_targetObject != null)
+    //         return;
+    //     
+    //     ServicesEvents.Constructor.PointOut(Object);
+    // }
 
-    private void FloorDown()
-    {
-        if(_floorHeight - 1 >= 0)
-        {
-            GridPlane.SetFloor(--_floorHeight);
-            PlayerGame.SetFloor(_floorHeight);
-        }
-    }
-
-    public void MoveObject(GridObject Object, Vector3 position)
-    {
-        if (_offsetPosition.Equals(-Vector3.one))
-            _offsetPosition = Object.transform.position - position;
-        
-        if(position.ToCell() == _updatePosition)
-            return;
-
-        Object.MoveTo((position + _offsetPosition).ToCell());
-        ConstructorUtils.MoveObject(Object);
-        Behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
-        
-        _updatePosition = position.ToCell();
-    }
+    // public void MoveObject(GridObject Object, Vector3 position)
+    // {
+    //     if (_offsetPosition.Equals(-Vector3.one))
+    //         _offsetPosition = Object.transform.position - position;
+    //     
+    //     if(position.ToCell() == _updatePosition)
+    //         return;
+    //
+    //     Object.MoveTo((position + _offsetPosition).ToCell());
+    //     ConstructorUtils.MoveObject(Object);
+    //     Behaviour.TryObjects(GameObject.FindObjectsByType<GridObject>(FindObjectsSortMode.InstanceID));
+    //     
+    //     _updatePosition = position.ToCell();
+    // }
     
     public void SpawnPlayer()
     {

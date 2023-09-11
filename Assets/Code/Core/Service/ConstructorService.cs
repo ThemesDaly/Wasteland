@@ -18,7 +18,6 @@ public class ConstructorService: MonoBehaviour, IConstructorService
     private void Awake()
     {
         Instance = this;
-
         Context = new ConstructorContext();
     }
 
@@ -40,6 +39,6 @@ public class ConstructorService: MonoBehaviour, IConstructorService
 
     public void Exit()
     {
-        
+        Context.DeInit();
     }
 }

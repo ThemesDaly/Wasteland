@@ -50,21 +50,6 @@ public class GridObject : MonoBehaviour
         _view.SetResult(_data.result);
     }
 
-    private void OnMouseDown()
-    {
-        Services.Constructor.Context.Drag(this);
-    }
-
-    private void OnMouseEnter()
-    {
-        Services.Constructor.Context.PointIn(this);
-    }
-
-    private void OnMouseExit()
-    {
-        Services.Constructor.Context.PointOut(this);
-    }
-    
     private void PointIn(GridObject Object)
     {
         if(!Object.Equals(this))

@@ -12,8 +12,9 @@ public class GameConfig : Config
     [BoxGroup("Controller")] public PlayerConstructor PlayerConstructorController;
     [BoxGroup("Controller")] public GridPlane gridPlane;
 
-    [BoxGroup("World")] public LayerMask LayerGround;
-    [BoxGroup("World")] public LayerMask LayerGrid;
+    [BoxGroup("Layer")] public LayerMask LayerGround;
+    [BoxGroup("Layer")] public LayerMask LayerGrid;
+    [BoxGroup("Layer")] public LayerMask LayerGridObject;
 
     public override void Init()
     {

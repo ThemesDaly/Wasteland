@@ -16,7 +16,6 @@ public class GameService : MonoBehaviour, IGameService
     private void Awake()
     {
         Instance = this;
-        
         Context = new GameContext();
     }
 

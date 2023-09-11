@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ConstructorController : MonoBehaviour
@@ -8,7 +9,16 @@ public class ConstructorController : MonoBehaviour
         Services.UI.Get<ConstructorUI>().Show();
         Services.UI.Get<ConstructorInventoryUI>().Show();
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Services.Scene.LoadSceneCoroutine(CoreConstants.Scene.LOBBY_LEVEL_INDEX);
+            Services.Constructor.Exit();
+        }
+    }
+
     private void OnDestroy()
     {
         Services.UI.Get<ConstructorUI>().Hide();
