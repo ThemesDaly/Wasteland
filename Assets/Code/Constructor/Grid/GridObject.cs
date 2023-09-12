@@ -1,11 +1,7 @@
 using System;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-public class GridObject : MonoBehaviour
+public partial class GridObject : MonoBehaviour
 {
     private const float RATE_LERP_MOVE = 25f;
     
@@ -19,6 +15,8 @@ public class GridObject : MonoBehaviour
     private Vector3 center;
 
     private BoxCollider _collider;
+
+    private Transform _transform;
 
     public void Init(Transform view)
     {
@@ -109,61 +107,4 @@ public class GridObject : MonoBehaviour
         
         _view.SetActive(false);
     }
-
-#if UNITY_EDITOR
-
-    private void OnDrawGizmos()
-    {
-        DrawLinks(new Color(1F, 0.3F, 0F, 0.5F), false);
-        DrawBound(new Color(0.4F, 0.8F, 1F, 1F), false);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        DrawCells(new Color(0.4F, 0.8F, 1F, 0.5F));
-        DrawBound(new Color(0.4F, 0.8F, 1F, 0.5F), true);
-        DrawLinks(new Color(1F, 0.3F, 0F, 1F), true);
-    }
-    
-    private void DrawBound(Color color, bool isSelected)
-    {
-        Gizmos.color = color;
-        
-        Gizmos.matrix = transform.localToWorldMatrix;
-        
-        Vector3 pivot = _bounds.Size / 2;
-        pivot.x -= 0.5F;
-        pivot.y -= 0.5F;
-        pivot.z = -pivot.z + 0.5F;
-
-        if(isSelected)
-            Gizmos.DrawCube(pivot, _bounds.Size * 1.01f);
-        else
-            Gizmos.DrawWireCube(pivot, _bounds.Size * 1.01f);
-    }
-
-    private void DrawCells(Color color)
-    {
-        Gizmos.color = color;
-
-        var cells = GetBounds();
-
-        foreach (var cell in cells)
-            Gizmos.DrawCube(cell.Position, Vector3.one * 0.95F);
-    }
-
-    private void DrawLinks(Color color, bool isSelected)
-    {
-        foreach (var connector in _connectors)
-        {
-            Gizmos.color = color;
-
-            if(isSelected)
-                Gizmos.DrawCube(transform.position + connector.Position, Vector3.one);
-            else
-                Gizmos.DrawWireCube(transform.position + connector.Position, Vector3.one);        }
-    }
-
-#endif
-    
 }

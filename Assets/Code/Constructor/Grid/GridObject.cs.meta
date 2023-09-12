@@ -3,7 +3,8 @@ guid: 32b76392f2534efb8140be1b2a700588
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - TransformMesh: {fileID: 7052563299723380877, guid: 81e50337f71ba4ea08617a1077b0aebf, type: 3}
   executionOrder: 0
   icon: {fileID: 2800000, guid: 496b2f126508a485084fd22a6a8cc206, type: 3}
   userData: 
