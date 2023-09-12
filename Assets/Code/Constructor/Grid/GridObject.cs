@@ -12,7 +12,7 @@ public class GridObject : MonoBehaviour
     [SerializeField] private GridObjectData _data;
     [SerializeField] private GridObjectView _view;
     [SerializeField] private GridObjectBounds _bounds;
-    [SerializeField] private GridObjectLink[] _links;
+    [SerializeField] private GridObjectConnector[] _connectors;
 
     public GridObjectData Data => _data;
 
@@ -35,14 +35,11 @@ public class GridObject : MonoBehaviour
         _data.SetTarget(view);
         _view.Init(view);
 
-        foreach (var link in _links)
+        foreach (var connector in _connectors)
         {
-            foreach (var connector in link.Connectors)
-            {
-                var connectorView = Instantiate(Configs.Get<GameConfig>().ConnectorView, transform);
-                connectorView.transform.position = transform.position + connector.Position;
-                connectorView.Init();   
-            }
+            var connectorView = Instantiate(Configs.Get<GameConfig>().ConnectorView, transform);
+            connectorView.transform.position = transform.position + connector.Position;
+            connectorView.Init();   
         }
         
         view.position = transform.position;
@@ -83,12 +80,12 @@ public class GridObject : MonoBehaviour
         return cells;
     }
 
-    public GridObjectLink[] GetLinks()
+    public GridObjectConnector[] GetConnectors()
     {
-        foreach (var link in _links)
-            link.RefreshPosition(transform.position + center);
+        foreach (var connector in _connectors)
+            connector.SetPosition(transform.position + center);
 
-        return _links;
+        return _connectors;
     }
 
     private void Update()
@@ -157,19 +154,14 @@ public class GridObject : MonoBehaviour
 
     private void DrawLinks(Color color, bool isSelected)
     {
-        foreach (var link in _links)
+        foreach (var connector in _connectors)
         {
-            foreach (var connector in link.Connectors)
-            {
-                // Gizmos.color = connector.Place == GridObjectLink.Connector.ConnectorPlace.Inside ? Color.cyan : Color.cyan / 2;
-                Gizmos.color = color;
+            Gizmos.color = color;
 
-                if(isSelected)
-                    Gizmos.DrawCube(transform.position + connector.Position, Vector3.one);
-                else
-                    Gizmos.DrawWireCube(transform.position + connector.Position, Vector3.one);   
-            }
-        }
+            if(isSelected)
+                Gizmos.DrawCube(transform.position + connector.Position, Vector3.one);
+            else
+                Gizmos.DrawWireCube(transform.position + connector.Position, Vector3.one);        }
     }
 
 #endif

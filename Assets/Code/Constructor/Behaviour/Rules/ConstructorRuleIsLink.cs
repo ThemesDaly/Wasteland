@@ -6,24 +6,20 @@ public class ConstructorRuleIsLink : ConstructorRule
 
     public override bool Execute(GridObject Object)
     {
-        var links = Object.GetLinks();
+        var connectors = Object.GetConnectors();
 
-        if (links.Length == 0)
+        if (connectors.Length == 0)
             return true;
         
-        foreach (var link in links)
+        foreach (var connector in connectors)
         {
-            foreach (var connector in link.Connectors)
+            if (_context.Grid[connector.Cell].Connectors.Count == 2)
             {
-                if (_context.Grid[connector.Cell].LinkObjects.Count == 2)
-                {
-                    var firstObject = _context.Grid[connector.Cell].LinkObjects[0];
-                    var secondObject = _context.Grid[connector.Cell].LinkObjects[1];
+                var firstObject = _context.Grid[connector.Cell].Connectors[0];
+                var secondObject = _context.Grid[connector.Cell].Connectors[1];
 
-                    if (ConstructorUtils.TryConnection(firstObject, secondObject))
-                        return true;
-                }
-
+                if (ConstructorUtils.TryConnection(firstObject, secondObject))
+                    return true;
             }
         }
 

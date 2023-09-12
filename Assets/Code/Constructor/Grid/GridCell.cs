@@ -7,13 +7,13 @@ public class GridCell
 
     public List<GridObject> Objects { get; private set; }
     
-    public List<GridObject> LinkObjects { get; private set; }
+    public List<GridObject> Connectors { get; private set; }
 
     public GridCell(int x, int y, int z)
     {
         Cell = Cell.Create(x, y, z);
         Objects = new List<GridObject>();
-        LinkObjects = new List<GridObject>();
+        Connectors = new List<GridObject>();
     }
 
     public bool IsEmpty => Objects.Count == 0;
@@ -24,9 +24,9 @@ public class GridCell
 
     public bool ContainsObject(GridObject Object) => Objects.Contains(Object);
 
-    public void AddConnector(GridObject Object) => LinkObjects.Add(Object);
+    public void AddConnector(GridObject Object) => Connectors.Add(Object);
     
-    public void RemoveConnector(GridObject Object) => LinkObjects.Remove(Object);
+    public void RemoveConnector(GridObject Object) => Connectors.Remove(Object);
     
-    public bool ContainsConnector(GridObject Object) => LinkObjects.Contains(Object);
+    public bool ContainsConnector(GridObject Object) => Connectors.Contains(Object);
 }

@@ -4,12 +4,12 @@ public static class ConstructorUtils
 {
     private static Cell[] _cells;
     
-    private static GridObjectLink[] _links;
+    private static GridObjectConnector[] _connectors;
 
     public static void StartMoveObject(GridObject Object)
     {
         _cells = Object.GetBounds();
-        _links = Object.GetLinks();
+        _connectors = Object.GetConnectors();
     }
 
     public static void ReplaceObject(GridObject Object)
@@ -22,19 +22,16 @@ public static class ConstructorUtils
                 context.Grid[cell].RemoveObject(Object);
         }
 
-        foreach (var link in _links)
+        foreach (var connector in _connectors)
         {
-            foreach (var connector in link.Connectors)
-            {
-                if(context.Grid[connector.Cell] != null)
-                    context.Grid[connector.Cell].RemoveConnector(Object);
-            }
+            if(context.Grid[connector.Cell] != null)
+                context.Grid[connector.Cell].RemoveConnector(Object);
         }
 
         PlaceObject(Object);
 
         _cells = Object.GetBounds();
-        _links = Object.GetLinks();
+        _connectors = Object.GetConnectors();
     }
     
     public static void PlaceObject(GridObject Object)
@@ -45,13 +42,10 @@ public static class ConstructorUtils
             if(context.Grid[cell] != null)
                 context.Grid[cell].AddObject(Object);
 
-        foreach (var link in Object.GetLinks())
+        foreach (var connector in Object.GetConnectors())
         {
-            foreach (var connector in link.Connectors)
-            {
-                if(context.Grid[connector.Cell] != null)
-                    context.Grid[connector.Cell].AddConnector(Object);
-            }
+            if(context.Grid[connector.Cell] != null)
+                context.Grid[connector.Cell].AddConnector(Object);
         }
     }
 
@@ -65,49 +59,34 @@ public static class ConstructorUtils
                 context.Grid[cell].RemoveObject(Object);
         }
 
-        foreach (var link in Object.GetLinks())
+        foreach (var connector in Object.GetConnectors())
         {
-            foreach (var connector in link.Connectors)
-            {
-                if(context.Grid[connector.Cell] != null)
-                    context.Grid[connector.Cell].RemoveConnector(Object);
-            }
+            if(context.Grid[connector.Cell] != null)
+                context.Grid[connector.Cell].RemoveConnector(Object);
         }
     }
 
     public static bool TryConnection(GridObject first, GridObject second)
     {
-        foreach (var firstLink in first.GetLinks())
+        foreach (var firstConnector in first.GetConnectors())
         {
-            foreach (var secondLink in second.GetLinks())
+            foreach (var secondConnector in second.GetConnectors())
             {
-                if (TryLinks(firstLink, secondLink))
+                if (TryConnectors(firstConnector, secondConnector))
                     return true;
             }
         }
 
         return false;
     }
-
-    public static bool TryLinks(GridObjectLink first, GridObjectLink second)
+    
+    public static bool TryConnectors(GridObjectConnector first, GridObjectConnector second)
     {
         var context = Services.Constructor.Context;
+
+        bool isPlace = (int)first.Place == -(int)second.Place;
+        bool isPosition = context.Grid[first.Cell].Equals(context.Grid[second.Cell]); 
         
-        foreach (var firstConnector in first.Connectors)
-        {
-            foreach (var secondConnector in second.Connectors)
-            {
-                if (context.Grid[firstConnector.Cell].Equals(context.Grid[secondConnector.Cell]) && 
-                    TryConnectors(firstConnector, secondConnector))
-                    return true;
-            }
-        }
-
-        return false;
-    }
-
-    public static bool TryConnectors(GridObjectLink.Connector first, GridObjectLink.Connector second)
-    {
-        return (int)first.Place == -(int)second.Place;
+        return isPlace && isPosition;
     }
 }
