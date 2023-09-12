@@ -13,6 +13,9 @@ public static class ServicesEvents
         public static event Action OnFloorUp;
         public static event Action OnFloorDown;
 
+        public static event Action<GridObject, GridObjectConnector.ConnectorData> OnShowConnector;
+        public static event Action<GridObject, GridObjectConnector.ConnectorData> OnHideConnector;
+
         public static void CursorCell(Vector3 worldPosition)
         {
             OnCursorCell?.Invoke(worldPosition.ToCell());
@@ -46,6 +49,16 @@ public static class ServicesEvents
         public static void FloorDown()
         {
             OnFloorDown?.Invoke();
+        }
+
+        public static void ShowConnectors(GridObject Object, GridObjectConnector.ConnectorData data)
+        {
+            OnShowConnector?.Invoke(Object, data);
+        }
+        
+        public static void HideConnectors(GridObject Object, GridObjectConnector.ConnectorData data)
+        {
+            OnHideConnector?.Invoke(Object, data);
         }
     }
     

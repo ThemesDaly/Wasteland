@@ -4,16 +4,74 @@ using UnityEngine;
 [Serializable]
 public class GridObjectConnector
 {
-    public ConnectorRequired Required;
-    public ConnectorDirection Direction;
-    public Vector3 Position;
+    [SerializeField] private ConnectorData _data;
+    public ConnectorData Data => _data;
+    
+    [SerializeField] private Vector3 _position;
+    public Vector3 Position => _position;
 
     private Cell _cell;
     public Cell Cell => _cell;
 
-    public void SetPosition(Vector3 position)
+    private GridObject _object;
+
+    private Vector3 _pivot;
+
+    private ConnectorView _view;
+    public ConnectorView View => _view;
+
+    public void Init(GridObject Object, Vector3 pivot)
     {
-        _cell = Cell.Create(position + Position);
+        _object = Object;
+        _pivot = pivot;
+        
+        _view = GameObject.Instantiate(Configs.Get<GameConfig>().ConnectorView, Object.transform);
+        _view.transform.position = Object.transform.position + _position;
+        _view.SetActive(false);
+        _view.SetDirectionContent(ConstructorUtils.GetDirectionForConnector(_data.Direction));
+
+        ServicesEvents.Constructor.OnShowConnector += Show;
+        ServicesEvents.Constructor.OnHideConnector += Hide;
+    }
+
+    public void CellPreparation()
+    {
+        _cell = Cell.Create(_object.transform.position + _position);
+    }
+
+    public void DeInit()
+    {
+        ServicesEvents.Constructor.OnShowConnector -= Show;
+        ServicesEvents.Constructor.OnHideConnector -= Hide;   
+    }
+
+    public void Show(GridObject Object, ConnectorData data)
+    {
+        if(!_data.Size.Equals(data.Size))
+            return;
+        
+        if(Object.Equals(_object))
+            _view.SetDirectionArrow(ConstructorUtils.GetDirectionForConnector(_data.Direction));
+        else
+            _view.SetDirectionArrow(ConstructorUtils.GetDirectionForConnector(-(int)_data.Direction));
+        
+        _view.SetActive(true);
+    }
+
+    public void Hide(GridObject Object, ConnectorData data)
+    {
+        if(!_data.Size.Equals(data.Size))
+            return;
+        
+        _view.SetActive(false);
+    }
+
+    [Serializable]
+    public struct ConnectorData
+    {
+        public ConnectorSize Size;
+        public ConnectorRequired Required;
+        public ConnectorDirection Direction;
     }
 
     public enum ConnectorDirection : int
@@ -30,5 +88,12 @@ public class GridObjectConnector
     {
         DontRequired = 0,
         Required = 1
+    }
+    
+    public enum ConnectorSize
+    {
+        Module = 0,
+        Interior = 1,
+        Exterior = 2
     }
 }

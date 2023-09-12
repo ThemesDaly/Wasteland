@@ -77,6 +77,8 @@ public class ConstructorContext : ICoreSystem
 
     public void RemoveModule(GridObject Object)
     {
+        Objects.Remove(Object);
+        Tools.Drop(Object);
         ConstructorUtils.ClearObject(Object);
         GameObject.Destroy(Object.Data.Target.gameObject);
         GameObject.Destroy(Object.gameObject);

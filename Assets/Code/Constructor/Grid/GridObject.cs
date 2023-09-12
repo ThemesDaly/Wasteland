@@ -12,7 +12,7 @@ public partial class GridObject : MonoBehaviour
 
     public GridObjectData Data => _data;
 
-    private Vector3 center;
+    private Vector3 _pivot;
 
     private BoxCollider _collider;
 
@@ -22,23 +22,19 @@ public partial class GridObject : MonoBehaviour
     {
         _collider = gameObject.AddComponent<BoxCollider>();
 
-        center = _bounds.Size / 2;
-        center.x -= 0.5F;
-        center.y -= 0.5F;
-        center.z = -center.z + 0.5F;
+        _pivot = _bounds.Size / 2;
+        _pivot.x -= 0.5F;
+        _pivot.y -= 0.5F;
+        _pivot.z = -_pivot.z + 0.5F;
 
-        _collider.center = center;
+        _collider.center = _pivot;
         _collider.size = _bounds.Size;
         
         _data.SetTarget(view);
         _view.Init(view);
 
         foreach (var connector in _connectors)
-        {
-            var connectorView = Instantiate(Configs.Get<GameConfig>().ConnectorView, transform);
-            connectorView.transform.position = transform.position + connector.Position;
-            connectorView.Init();   
-        }
+            connector.Init(this, _pivot);
         
         view.position = transform.position;
 
@@ -50,6 +46,9 @@ public partial class GridObject : MonoBehaviour
     {
         ServicesEvents.Constructor.OnPointIn -= PointIn;
         ServicesEvents.Constructor.OnPointOut -= PointOut;
+
+        foreach (var connector in _connectors)
+            connector.DeInit();
     }
     
     public void MoveTo(Vector3 position)
@@ -81,8 +80,8 @@ public partial class GridObject : MonoBehaviour
     public GridObjectConnector[] GetConnectors()
     {
         foreach (var connector in _connectors)
-            connector.SetPosition(transform.position + center);
-
+            connector.CellPreparation();
+        
         return _connectors;
     }
 
@@ -98,6 +97,9 @@ public partial class GridObject : MonoBehaviour
             return;
         
         _view.SetActive(true);
+
+        // foreach (var connector in _connectors)
+            // connector.View.SetActive(true);
     }
 
     private void PointOut(GridObject Object)
@@ -106,5 +108,8 @@ public partial class GridObject : MonoBehaviour
             return;   
         
         _view.SetActive(false);
+        
+        // foreach (var connector in _connectors)
+            // connector.View.SetActive(false);
     }
 }

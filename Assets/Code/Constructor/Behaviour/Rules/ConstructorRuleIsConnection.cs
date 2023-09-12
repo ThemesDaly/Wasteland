@@ -17,7 +17,7 @@ public class ConstructorRuleIsConnection : ConstructorRule
         
         foreach (var connector in connectors)
         {
-            if (connector.Required == GridObjectConnector.ConnectorRequired.Required)
+            if (connector.Data.Required == GridObjectConnector.ConnectorRequired.Required)
                 requiredCount++;
             
             if (_context.Grid[connector.Cell].Connectors.Count == 2)
@@ -30,9 +30,9 @@ public class ConstructorRuleIsConnection : ConstructorRule
 
                 if (ConstructorUtils.TryConnectionObjects(Object, other))
                 {
-                    if (connector.Required == GridObjectConnector.ConnectorRequired.Required)
+                    if (connector.Data.Required == GridObjectConnector.ConnectorRequired.Required)
                         requiredConnection++;
-                    else if (connector.Required == GridObjectConnector.ConnectorRequired.DontRequired)
+                    else if (connector.Data.Required == GridObjectConnector.ConnectorRequired.DontRequired)
                         allConnection++;
                 }
             }

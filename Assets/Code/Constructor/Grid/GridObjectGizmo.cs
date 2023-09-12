@@ -58,7 +58,7 @@ partial class GridObject : MonoBehaviour
         
         foreach (var connector in _connectors)
         {
-            Gizmos.color = connector.Required == GridObjectConnector.ConnectorRequired.Required ? GizmoConstants.ColorConnectorRequiment : GizmoConstants.ColorConnectorDontRequiment;
+            Gizmos.color = connector.Data.Required == GridObjectConnector.ConnectorRequired.Required ? GizmoConstants.ColorConnectorRequiment : GizmoConstants.ColorConnectorDontRequiment;
 
             if(isSelected)
                 Gizmos.DrawCube(transform.position + connector.Position, Vector3.one * 1.025F);

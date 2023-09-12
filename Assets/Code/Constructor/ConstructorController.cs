@@ -18,10 +18,4 @@ public class ConstructorController : MonoBehaviour
             Services.Constructor.Exit();
         }
     }
-
-    private void OnDestroy()
-    {
-        Services.UI.Get<ConstructorUI>().Hide();
-        Services.UI.Get<ConstructorInventoryUI>().Hide();
-    }
 }

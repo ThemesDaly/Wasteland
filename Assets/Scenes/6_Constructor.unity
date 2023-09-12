@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage: 1
-  renderingStrategy: 0
+  renderingStrategy: 1
   renderingMode: 0
   outlineLayerMask: -1
   primaryBufferSizeMode: 0

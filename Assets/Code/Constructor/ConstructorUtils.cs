@@ -84,9 +84,29 @@ public static class ConstructorUtils
     {
         var context = Services.Constructor.Context;
         
-        bool isPlace = (int)first.Direction == -(int)second.Direction;
+        bool isPlace = (int)first.Data.Direction == -(int)second.Data.Direction;
         bool isPosition = context.Grid[first.Cell].Equals(context.Grid[second.Cell]); 
         
         return isPlace && isPosition;
+    }
+
+    public static Vector3 GetDirectionForConnector(int direction)
+    {
+        return GetDirectionForConnector((GridObjectConnector.ConnectorDirection)direction);
+    }
+
+    public static Vector3 GetDirectionForConnector(GridObjectConnector.ConnectorDirection direction)
+    {
+        switch (direction)
+        {
+            case GridObjectConnector.ConnectorDirection.Up: return Vector3.up;
+            case GridObjectConnector.ConnectorDirection.Down: return Vector3.down;
+            case GridObjectConnector.ConnectorDirection.Left: return Vector3.left;
+            case GridObjectConnector.ConnectorDirection.Right: return Vector3.right;
+            case GridObjectConnector.ConnectorDirection.Forward: return Vector3.forward;
+            case GridObjectConnector.ConnectorDirection.Backward: return Vector3.back;
+        }
+
+        return Vector3.zero;
     }
 }

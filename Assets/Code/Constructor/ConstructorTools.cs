@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class ConstructorTools
@@ -40,6 +41,10 @@ public sealed class ConstructorTools
 
         ServicesEvents.Constructor.Drag(Object);
         ConstructorUtils.StartMoveObject(Object);
+
+        foreach (var connector in Object.GetConnectors())
+            if (connector.Data.Required == GridObjectConnector.ConnectorRequired.Required)
+                ServicesEvents.Constructor.ShowConnectors(Object, connector.Data);
     }
 
     public void Drop(GridObject Object)
@@ -51,6 +56,10 @@ public sealed class ConstructorTools
         
         ServicesEvents.Constructor.Drop(Object);
         _behaviour.TryObjects(_context.Objects);
+        
+        foreach (var connector in Object.GetConnectors())
+            if (connector.Data.Required == GridObjectConnector.ConnectorRequired.Required)
+                ServicesEvents.Constructor.HideConnectors(Object, connector.Data);
     }
     
     public void MoveObject(GridObject Object, Vector3 position)
