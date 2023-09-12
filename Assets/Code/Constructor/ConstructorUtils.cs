@@ -66,25 +66,25 @@ public static class ConstructorUtils
         }
     }
 
-    public static bool TryConnection(GridObject first, GridObject second)
+    public static bool TryConnectionObjects(GridObject Object, GridObject other)
     {
-        foreach (var firstConnector in first.GetConnectors())
+        foreach (var firstConnector in Object.GetConnectors())
         {
-            foreach (var secondConnector in second.GetConnectors())
+            foreach (var secondConnector in other.GetConnectors())
             {
                 if (TryConnectors(firstConnector, secondConnector))
                     return true;
             }
         }
-
+        
         return false;
     }
     
     public static bool TryConnectors(GridObjectConnector first, GridObjectConnector second)
     {
         var context = Services.Constructor.Context;
-
-        bool isPlace = (int)first.Place == -(int)second.Place;
+        
+        bool isPlace = (int)first.Direction == -(int)second.Direction;
         bool isPosition = context.Grid[first.Cell].Equals(context.Grid[second.Cell]); 
         
         return isPlace && isPosition;

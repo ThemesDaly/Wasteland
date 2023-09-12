@@ -10,7 +10,7 @@ public sealed class ConstructorBehaviour
         {
             new ConstructorRuleIsGrid(context),
             new ConstructorRuleIsEmpty(context),
-            new ConstructorRuleIsLink(context)
+            new ConstructorRuleIsConnection(context)
         };
     }
 

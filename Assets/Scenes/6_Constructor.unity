@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage: 1
-  renderingStrategy: 1
+  renderingStrategy: 0
   renderingMode: 0
   outlineLayerMask: -1
   primaryBufferSizeMode: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   dilateIterations: 1
   dilateQuality: 0
   blurIterations: 1
-  blurType: 4
+  blurType: 1
 --- !u!1 &1620824941
 GameObject:
   m_ObjectHideFlags: 0

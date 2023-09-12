@@ -7,7 +7,7 @@ partial class GridObject : MonoBehaviour
     private void OnDrawGizmos()
     {
         DrawTransform();
-        DrawLinks(GizmoConstants.Orange.WithAlpha(0.5F), false);
+        DrawConnectors(GizmoConstants.Orange.WithAlpha(0.5F), false);
         DrawBound(GizmoConstants.Blue.WithAlpha(1f), false);
     }
 
@@ -15,7 +15,7 @@ partial class GridObject : MonoBehaviour
     {
         DrawCells(GizmoConstants.Blue.WithAlpha(0.5F));
         DrawBound(GizmoConstants.Blue.WithAlpha(0.5F), true);
-        DrawLinks(GizmoConstants.Orange.WithAlpha(1F), true);
+        DrawConnectors(GizmoConstants.Orange.WithAlpha(1F), true);
     }
 
     private void DrawTransform()
@@ -51,18 +51,19 @@ partial class GridObject : MonoBehaviour
             Gizmos.DrawCube(cell.Position, Vector3.one * 0.95F);
     }
 
-    private void DrawLinks(Color color, bool isSelected)
+    private void DrawConnectors(Color color, bool isSelected)
     {
         if(_connectors == null)
             return;
         
         foreach (var connector in _connectors)
         {
-            Gizmos.color = color;
+            Gizmos.color = connector.Required == GridObjectConnector.ConnectorRequired.Required ? GizmoConstants.ColorConnectorRequiment : GizmoConstants.ColorConnectorDontRequiment;
 
             if(isSelected)
-                Gizmos.DrawCube(transform.position + connector.Position, Vector3.one);
+                Gizmos.DrawCube(transform.position + connector.Position, Vector3.one * 1.025F);
             else
-                Gizmos.DrawWireCube(transform.position + connector.Position, Vector3.one);        }
+                Gizmos.DrawWireCube(transform.position + connector.Position, Vector3.one * 1.025F);        
+        }
     }
 }

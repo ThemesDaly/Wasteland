@@ -2319,6 +2319,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4988690882369068326, guid: 4b833e244aa004b079724637a39c2640, type: 3}
+      propertyPath: _connectors.Array.data[0].Required
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988690882369068326, guid: 4b833e244aa004b079724637a39c2640, type: 3}
+      propertyPath: _connectors.Array.data[0].Direction
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988690882369068326, guid: 4b833e244aa004b079724637a39c2640, type: 3}
       propertyPath: _connectors.Array.data[0].Position.x
       value: 1
       objectReference: {fileID: 0}

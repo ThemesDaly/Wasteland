@@ -5,6 +5,8 @@ public static class GizmoConstants
     public static Color Blue = new Color(0.4F, 0.8F, 1F);
     public static Color Orange = new Color(1F, 0.3F, 0F);
     public static Color ColorTransform = new Color(1F, 0.3F, 0F);
+    public static Color ColorConnectorRequiment = new Color(0f, 0.9F, 0F);
+    public static Color ColorConnectorDontRequiment = new Color(0F, 0F, 1F);
 
     private static Mesh _transformVector3;
     public static Mesh TransformVector3 => _transformVector3 == null ? _transformVector3 = Resources.Load<Mesh>("Gizmo/TransformVector3") : _transformVector3;
