@@ -30,7 +30,7 @@ public class ConstructorContext : ICoreSystem
         Grid = new Grid(64, 64);
         Grid.Init();
         
-        GridPlane = ContextUtils.SpawnManager<GridPlane>(_controllers, Configs.Get<GameConfig>().gridPlane);
+        GridPlane = ContextUtils.SpawnManager<GridPlane>(_controllers, Configs.Get<GameConfig>().GridPlane);
 
         Behaviour = new ConstructorBehaviour(this);
         Tools = new ConstructorTools(this, Behaviour);

@@ -16,7 +16,8 @@ MonoBehaviour:
   PlayerCamera: {fileID: 386126728491471917, guid: 6a5289673aa5647b7a3b58c40ed0ea9d, type: 3}
   PlayerGameController: {fileID: 2985475338176757392, guid: 230d97dd178d7426499b0e851c6b2fa5, type: 3}
   PlayerConstructorController: {fileID: -6584061510271490880, guid: d358396b856d5404a9b6adc74cc21140, type: 3}
-  gridPlane: {fileID: 26897397202924365, guid: 6fde88b207457440cba35947269eec81, type: 3}
+  GridPlane: {fileID: 26897397202924365, guid: 6fde88b207457440cba35947269eec81, type: 3}
+  ConnectorView: {fileID: 8327075137883901758, guid: 9afe19f0bbc4f41ccbcedd21c73153a4, type: 3}
   LayerGround:
     serializedVersion: 2
     m_Bits: 0

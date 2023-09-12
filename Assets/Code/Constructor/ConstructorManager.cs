@@ -58,8 +58,6 @@ public sealed class ConstructorManager
                 _targetObject = _hit.transform.GetComponent<GridObject>();
                 PointIn(_targetObject);
             }
-
-            ServicesEvents.Constructor.CursorCell(_hit.point);
         }
         else if (_targetObject)
         {
@@ -80,9 +78,12 @@ public sealed class ConstructorManager
             _tools.Drop(_grabObject);
             _grabObject = null;
         }
-        else if(_grabObject && Physics.Raycast(_ray, out _hit, Mathf.Infinity, _gridLayer))
+        else if(Physics.Raycast(_ray, out _hit, Mathf.Infinity, _gridLayer))
         {
-            _tools.MoveObject(_grabObject, _hit.point);
+            if(_grabObject)
+                _tools.MoveObject(_grabObject, _hit.point);
+            
+            ServicesEvents.Constructor.CursorCell(_hit.point);
         }
     }
 

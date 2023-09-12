@@ -34,40 +34,34 @@ public class GridObject : MonoBehaviour
         
         _data.SetTarget(view);
         _view.Init(view);
+
+        foreach (var link in _links)
+        {
+            foreach (var connector in link.Connectors)
+            {
+                var connectorView = Instantiate(Configs.Get<GameConfig>().ConnectorView, transform);
+                connectorView.transform.position = transform.position + connector.Position;
+                connectorView.Init();   
+            }
+        }
         
         view.position = transform.position;
 
         ServicesEvents.Constructor.OnPointIn += PointIn;
         ServicesEvents.Constructor.OnPointOut += PointOut;
     }
-
-    private void Update()
+    
+    private void OnDestroy()
     {
-        _data.Target.position = Vector3.Lerp(_data.Target.position, transform.position, RATE_LERP_MOVE * Time.unscaledDeltaTime);
-        _view.SetResult(_data.result);
+        ServicesEvents.Constructor.OnPointIn -= PointIn;
+        ServicesEvents.Constructor.OnPointOut -= PointOut;
     }
-
-    private void PointIn(GridObject Object)
-    {
-        if(!Object.Equals(this))
-            return;
-        
-        _view.SetActive(true);
-    }
-
-    private void PointOut(GridObject Object)
-    {
-        if(!Object.Equals(this))
-            return;   
-        
-        _view.SetActive(false);
-    }
-
+    
     public void MoveTo(Vector3 position)
     {
         transform.position = position.ToCell();
     }
-
+    
     public Cell[] GetBounds()
     {
         int cellCount = (int)(_bounds.Size.x * _bounds.Size.z * _bounds.Size.y);
@@ -95,6 +89,28 @@ public class GridObject : MonoBehaviour
             link.RefreshPosition(transform.position + center);
 
         return _links;
+    }
+
+    private void Update()
+    {
+        _data.Target.position = Vector3.Lerp(_data.Target.position, transform.position, RATE_LERP_MOVE * Time.unscaledDeltaTime);
+        _view.SetResult(_data.result);
+    }
+
+    private void PointIn(GridObject Object)
+    {
+        if(!Object.Equals(this))
+            return;
+        
+        _view.SetActive(true);
+    }
+
+    private void PointOut(GridObject Object)
+    {
+        if(!Object.Equals(this))
+            return;   
+        
+        _view.SetActive(false);
     }
 
 #if UNITY_EDITOR
