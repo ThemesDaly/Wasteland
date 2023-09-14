@@ -20,7 +20,7 @@ public class ConstructorRuleIsConnection : ConstructorRule
             if (connector.Data.Required == GridObjectConnector.ConnectorRequired.Required)
                 requiredCount++;
             
-            if (_context.Grid[connector.Cell].Connectors.Count == 2)
+            if (_context.Grid[connector.Cell] != null && _context.Grid[connector.Cell].Connectors.Count == 2)
             {
                 GridObject other = null;
                 

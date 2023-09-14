@@ -65,7 +65,7 @@ public sealed class ConstructorTools
     public void MoveObject(GridObject Object, Vector3 position)
     {
         if (_offsetPosition.Equals(-Vector3.one))
-            _offsetPosition = Object.transform.position - position;
+            _offsetPosition = (Object.transform.position - position).WithY(0);
         
         if(position.ToCell() == _updatePosition)
             return;
@@ -79,8 +79,9 @@ public sealed class ConstructorTools
     
     private void FloorUp()
     {
-        if(_floorHeight + 1 <= Grid.GRID_SIZE_Y)
+        if(_floorHeight + 1 < Grid.GRID_SIZE_Y)
         {
+            Debug.Log($"Max height: {Grid.GRID_SIZE_Y} current {_floorHeight + 1}");
             _context.GridPlane.SetFloor(++_floorHeight);
             _context.PlayerGame.SetFloor(_floorHeight);
         }

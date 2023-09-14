@@ -97,9 +97,6 @@ public partial class GridObject : MonoBehaviour
             return;
         
         _view.SetActive(true);
-
-        // foreach (var connector in _connectors)
-            // connector.View.SetActive(true);
     }
 
     private void PointOut(GridObject Object)
@@ -108,8 +105,5 @@ public partial class GridObject : MonoBehaviour
             return;   
         
         _view.SetActive(false);
-        
-        // foreach (var connector in _connectors)
-            // connector.View.SetActive(false);
     }
 }
